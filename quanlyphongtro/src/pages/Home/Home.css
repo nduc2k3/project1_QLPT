@@ -1,0 +1,53 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.home-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Chiếm toàn bộ chiều cao màn hình */
+    gap: 20px;
+    padding: 20px;
+}
+
+.row1, .row2, .row3 {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    flex-grow: 1; /* Các hàng sẽ chiếm đều không gian */
+}
+
+.trangthai-home, .doanhthu, .danhsachphong, .danhsachkhach, .gopy {
+    display: flex;
+    flex-direction: column;
+    background-color: aqua;
+    border-radius: 20px;
+    justify-content: flex-start; /*đưa các trạng thái lên đầu*/
+    padding: 20px;
+    flex-grow: 1; /* Giúp các ô lấp đầy không gian một cách linh hoạt */
+    flex-basis: 0; /* Cho phép chia đều không gian giữa các ô */
+    min-height: 100px; /* Đảm bảo các ô không bị quá nhỏ khi thu nhỏ màn hình */
+    min-width: 150px; /* Đảm bảo các ô không bị quá nhỏ về chiều rộng */
+}
+.box{
+    flex: 1; /* Hộp box sẽ chiếm không gian còn lại của phần trang thái */
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+}
+.Ngay , .Thang{
+    border-radius: 12px;
+    flex: 1;
+    margin-right: 10px;
+    width: 90px;
+}
+.input{
+    margin-bottom: 10px;
+}
+.trangthai h2, .doanhthu h2, .danhsachphong h2, .danhsachkhach h2, .gopy h2 {
+    text-align: center; /* Căn giữa theo chiều ngang */
+    margin: 0;
+}

@@ -1,0 +1,50 @@
+.room-container {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid black;
+    max-width: 400px;
+    border-radius: 10px;
+    padding: 15px; /* Khoảng cách giữa viền và nội dung */
+    background-color: #f0f0f0; /* Màu nền cho container */
+}
+
+.giaphong, .trangthai {
+    background-color: aliceblue;
+    padding: 10px; /* Khoảng cách bên trong cho các phần này */
+}
+
+.btn-room {
+    display: flex; /* Sử dụng flexbox để căn chỉnh các phần tử */
+    justify-content: center; /* Căn giữa các nút */
+    gap: 10px; /* Khoảng cách giữa các nút */
+    margin: 10px 0; /* Khoảng cách giữa nút và các phần tử khác */
+}
+
+.btn-room button {
+    padding: 10px 20px; /* Kích thước button */
+    font-size: 16px; /* Kích thước chữ trong button */
+    border-radius: 5px; /* Bo tròn góc button */
+    cursor: pointer; /* Con trỏ khi di chuột vào button */
+    border: 1px solid #ccc; /* Viền button */
+}
+
+.image {
+    width: 100%; /* Đảm bảo khung chứa ảnh chiếm toàn bộ chiều rộng */
+    height: 250px; /* Đặt chiều cao cố định cho khung ảnh */
+    overflow: hidden; /* Ẩn phần dư nếu có */
+    display: flex;
+    justify-content: center; /* Căn giữa ảnh */
+    align-items: center; /* Căn giữa ảnh theo chiều dọc */
+    border: 2px solid black; /* Viền cho khung chứa ảnh */
+    border-radius: 10px; /* Bo tròn góc của khung ảnh (tuỳ chọn) */
+    margin: 10px 0; /* Khoảng cách phía trên và dưới giữa khung ảnh và các phần khác */
+}
+
+.image img {
+    width: 100%; /* Chiếm toàn bộ chiều ngang của khung */
+    height: 100%; /* Đảm bảo ảnh chiếm toàn bộ chiều cao của khung */
+    object-fit: contain; /* Giữ nguyên toàn bộ nội dung ảnh và thu nhỏ cho vừa khung */
+    display: block;
+    margin: 0 auto;
+    border-radius: 5px; /* Bo tròn góc của ảnh (tuỳ chọn) */
+}

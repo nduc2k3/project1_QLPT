@@ -1,0 +1,27 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    box-sizing: border-box;
+}
+.container-rooms{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    gap: 20px;
+    padding: 40px;
+}
+.search{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    justify-content: space-between;
+}
+.rooms-text{
+    display: flex;
+    flex-direction: row;
+    margin-left: 20px;
+}
+.rooms-text h3{
+    margin-right: 20px;
+}
