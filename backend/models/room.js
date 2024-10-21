@@ -5,7 +5,8 @@ mongoose.connect('mongodb://localhost/DB0001');
 const RoomSchema = new Schema({
     maphong : String,
     tenphong : String,
-    trangthai : Boolean,
+    trangthaiphong : Boolean,
+    trangthaitt: Boolean,
     hinhanh : String,
     giaphong :Number,
     mota : String
