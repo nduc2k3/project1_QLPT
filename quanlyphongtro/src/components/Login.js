@@ -8,7 +8,7 @@ const Login = ({ onLoginSuccess }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [apiEmails, setApiEmails] = useState([]); // Thay đổi thành mảng để lưu nhiều email
-    const [apiPassword, setApiPassword] = useState("password123"); // Mật khẩu mẫu
+    const [apiPassword, setApiPassword] = useState([]); // Mật khẩu mẫu
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
 
@@ -18,12 +18,14 @@ const Login = ({ onLoginSuccess }) => {
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                const response = await axios.get('https://reqres.in/api/users'); // API lấy danh sách người dùng
-                const users = response.data.data; // Danh sách người dùng
+                const response = await axios.get('http://localhost:8080/api/acc'); // API lấy danh sách người dùng
+                const users = response.data; // Danh sách người dùng
 
                 // Lấy tất cả email từ danh sách người dùng
                 const emails = users ? users.map(user => user.email) : [];
                 setApiEmails(emails); // Lưu email vào state
+                const passwords = users ? users.map(user => user.password) : [];
+                setApiPassword(passwords);
             } catch (error) {
                 console.error('Error fetching user data:', error);
             }
@@ -31,10 +33,23 @@ const Login = ({ onLoginSuccess }) => {
         fetchUserData();
     }, []);
 
+    // Hàm validate email
+    const validateEmail = (email) => {
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return regex.test(email);
+    };
+
     const handleLogin = async (e) => {
         e.preventDefault();
         setLoading(true);
         setError("");
+
+        // Validate email
+        if (!validateEmail(email)) {
+            setError("Email không hợp lệ.");
+            setLoading(false);
+            return;
+        }
 
         if (password.length < 8) {
             setError("Mật khẩu phải có 8 kí tự trở lên");
@@ -43,7 +58,7 @@ const Login = ({ onLoginSuccess }) => {
         }
 
         // So sánh dữ liệu người dùng nhập vào với dữ liệu từ API
-        if (apiEmails.includes(email) && password === apiPassword) {
+        if (apiEmails.includes(email) && apiPassword.includes(password)) {
             alert('Đăng nhập thành công!');
             onLoginSuccess(); // Gọi hàm onLoginSuccess khi đăng nhập thành công
             navigate("/home"); // Sử dụng navigate để điều hướng đến trang Home

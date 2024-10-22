@@ -13,7 +13,6 @@ const Menu = ({children}) => {
                 <ul>
                     <li><Link to="/home">Trang Chủ</Link></li>
                     <li><Link to="/rooms">Phòng</Link></li>
-                    <li><Link to="/services">Dịch Vụ</Link></li>
                     <li><Link to="/electricity">Chỉ Số Điện</Link></li>
                     <li><Link to="/water">Chỉ Số Nước</Link></li>
                     <li><Link to="/tenants">Danh Sách Khách Thuê</Link></li>

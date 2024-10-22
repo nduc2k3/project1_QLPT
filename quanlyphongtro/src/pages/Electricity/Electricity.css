@@ -1,0 +1,16 @@
+.custom-container-electricity {
+    padding: 20px;
+}
+
+.custom-table-electricity {
+    margin-top: 20px;
+}
+
+.custom-table-electricity table {
+    width: 100%;
+}
+.header-electricity{
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 20px;
+}

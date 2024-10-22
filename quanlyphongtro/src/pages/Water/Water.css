@@ -1,0 +1,16 @@
+.custom-container- {
+    padding: 20px;
+}
+
+.custom-table-water {
+    margin-top: 20px;
+}
+
+.custom-table-water table {
+    width: 100%;
+}
+.header-water{
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 20px;
+}

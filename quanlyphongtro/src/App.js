@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import Home from './pages/Home/index';
 import Rooms from './pages/Rooms/index';
+import Electricity from './pages/Electricity/index';
+import Water from './pages/Water/index';
 import Menu from './components/Menu';
 import Login from './components/Login';
 import './App.css';
@@ -28,6 +30,8 @@ function App() {
           <Route path="/" element={<Navigate to="/home" />} />
           <Route path="/home" element={<Menu><Home /></Menu>} />
           <Route path="/rooms" element={<Menu><Rooms /></Menu>} />
+          <Route path="/electricity" element={<Menu><Electricity/></Menu>}/>
+          <Route path="/water" element={<Menu><Water/></Menu>}/>
         </>
       )}
     </Routes>

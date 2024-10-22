@@ -28,7 +28,7 @@
     border: 1px solid #ccc; /* Viền button */
 }
 
-.image {
+.image-room {
     width: 100%; /* Đảm bảo khung chứa ảnh chiếm toàn bộ chiều rộng */
     height: 250px; /* Đặt chiều cao cố định cho khung ảnh */
     overflow: hidden; /* Ẩn phần dư nếu có */
@@ -47,4 +47,10 @@
     display: block;
     margin: 0 auto;
     border-radius: 5px; /* Bo tròn góc của ảnh (tuỳ chọn) */
+}
+.giaphong h3{
+    font-size: 18px;
+}
+.trangthai h3{
+    font-size: 18px;
 }
