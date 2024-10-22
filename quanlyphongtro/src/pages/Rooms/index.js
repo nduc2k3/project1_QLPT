@@ -11,35 +11,38 @@ function Rooms() {
     const [statusRoom, setStatusRoom] = useState("Trạng thái phòng");
     const [statusFee, setStatusFee] = useState("Trạng thái phí");
     const [listRoom, setListRoom] = useState([]);
-    const [filteredRooms, setFilteredRooms] = useState([]); // Danh sách đã lọc
-    const [roomSearch, setRoomSearch] = useState(""); // Lưu giá trị tìm kiếm theo phòng
-    const [noDataMessage, setNoDataMessage] = useState(""); // Thông báo khi không có dữ liệu
-
-    const handlError = (error) =>{
-        console.log("loi",error);
-    }
-    // Hàm để cập nhật giá trị đã chọn từ Dropdown phòng
+    const [filteredRooms, setFilteredRooms] = useState([]);
+    const [roomSearch, setRoomSearch] = useState("");
+    const [noDataMessage, setNoDataMessage] = useState("");
     const handleRoomStatusChange = (item) => {
         setStatusRoom(item);
     };
 
-    // Hàm để cập nhật giá trị đã chọn từ Dropdown phí
     const handleFeeStatusChange = (item) => {
         setStatusFee(item);
     };
-    const handleDeleteRoom = (maphong) =>{
+
+    const handleDeleteRoom = (maphong) => {
         const updateRoom = listRoom.filter(room => room.maphong !== maphong);
         setListRoom(updateRoom);
         setFilteredRooms(updateRoom);
     };
-    // Hàm lấy dữ liệu phòng từ API
+
+    const handleUpdateRoom = (updatedRoom) => {
+        const updatedRooms = filteredRooms.map(room => 
+            room.maphong === updatedRoom.maphong ? updatedRoom : room
+        );
+        setFilteredRooms(updatedRooms);
+        setListRoom(updatedRooms); // Cập nhật danh sách gốc nếu cần
+    };
+
     useEffect(() => {
         const fetchRoomData = async () => {
             try {
                 const response = await axios.get('http://localhost:8080/api/room');
                 const rooms = response.data;
                 setListRoom(rooms);
-                setFilteredRooms(rooms); // Ban đầu hiển thị toàn bộ phòng
+                setFilteredRooms(rooms);
             } catch (error) {
                 console.error('Error fetching room data:', error);
             }
@@ -47,9 +50,7 @@ function Rooms() {
         fetchRoomData();
     }, []);
 
-    // Hàm để xử lý lọc phòng khi nhấn nút Tìm kiếm
     const handleSearch = () => {
-        // Lọc danh sách phòng dựa trên trạng thái phòng, trạng thái phí và tên phòng
         const filtered = listRoom.filter(room => {
             const matchStatusRoom = statusRoom === "Trạng thái phòng" || 
                                     (statusRoom === "đã thuê" && room.trangthaiphong === true) || 
@@ -64,26 +65,22 @@ function Rooms() {
             return matchStatusRoom && matchStatusFee && matchRoomSearch;
         });
 
-        // Cập nhật danh sách phòng đã lọc
         setFilteredRooms(filtered);
-
-        // Hiển thị thông báo nếu không tìm thấy dữ liệu
         if (filtered.length === 0) {
             setNoDataMessage("Không có dữ liệu phù hợp với tiêu chí tìm kiếm!");
         } else {
-            setNoDataMessage(""); // Reset lại thông báo nếu có dữ liệu
+            setNoDataMessage("");
         }
 
-        // Reset các giá trị tìm kiếm về mặc định
         setStatusRoom("Trạng thái phòng");
         setStatusFee("Trạng thái phí");
         setRoomSearch("");
     };
 
-    // Tính tổng số phòng theo trạng thái
-    const totalAvailable = listRoom.filter(room => room.trangthaiphong === false).length; // Phòng trống
-    const totalRented = listRoom.filter(room => room.trangthaiphong === true).length; // Phòng đã thuê
-    const totalUnpaid = listRoom.filter(room => room.trangthaitt === false).length; // Phòng chưa thu phí
+    const totalAvailable = listRoom.filter(room => room.trangthaiphong === false).length;
+    const totalRented = listRoom.filter(room => room.trangthaiphong === true).length;
+    const totalUnpaid = listRoom.filter(room => room.trangthaitt === false).length;
+
     return (
         <>
             <div className="container-rooms">
@@ -103,7 +100,7 @@ function Rooms() {
                         placeholder="Phòng:" 
                         className="input-field" 
                         value={roomSearch} 
-                        onChange={(e) => setRoomSearch(e.target.value)} // Cập nhật giá trị tìm kiếm theo phòng
+                        onChange={(e) => setRoomSearch(e.target.value)} 
                     />
                     <button className="btn-search" onClick={handleSearch}>Tìm Kiếm</button>
                 </div>
@@ -115,14 +112,18 @@ function Rooms() {
                 </div>
 
                 <div className="rooms-room">
-                    {noDataMessage ? ( // Kiểm tra nếu không có dữ liệu
+                    {noDataMessage ? (
                         <div className="no-data-message">
                             {noDataMessage}
                         </div>
                     ) : (
                         filteredRooms.map((room, index) => (
-                            <Room key={index} room={room} onDelete={handleDeleteRoom} 
-                            onError={handlError} />
+                            <Room 
+                                key={index} 
+                                room={room} 
+                                onDelete={handleDeleteRoom} 
+                                onUpdate={handleUpdateRoom} // Truyền hàm onUpdate vào đây
+                            />
                         ))
                     )}
                 </div>
