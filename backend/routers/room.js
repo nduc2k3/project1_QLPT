@@ -18,6 +18,7 @@ router.get('/', (req, res, next) => {
 router.post('/', (req, res, next) => {
     var maphong = req.body.maphong
     var tenphong = req.body.tenphong
+    var tang = req.body.tang
     var trangthaiphong = req.body.trangthaiphong
     var trangthaitt = req.body.trangthaitt
     var hinhanh = req.body.hinhanh
@@ -27,6 +28,7 @@ router.post('/', (req, res, next) => {
     RoomModel.create({
         maphong: maphong,
         tenphong: tenphong,
+        tang: tang,
         trangthaiphong: trangthaiphong,
         trangthaitt: trangthaitt,
         hinhanh: hinhanh,
@@ -42,21 +44,25 @@ router.post('/', (req, res, next) => {
         })
 })
 
-router.delete('/:id', (req, res, next) => {
-    var id = req.params.id
-    RoomModel.deleteOne({
-        _id: id
-    })
-        .then(data => {
-            res.json('Xoa thanh cong')
-        })
-        .catch(err => {
-            res.status(500).json('loi sever')
-        })
-})
+router.delete('/:maphong', (req, res, next) => {
+    const maphong = req.params.maphong;
 
-router.put('/', (req, res, next) => {
-    const maphong = req.body.maphong;
+    RoomModel.deleteOne({
+        maphong: maphong
+    })
+    .then(data => {
+        if (data.deletedCount === 0) {
+            return res.status(404).json('Không tìm thấy phòng để xóa');
+        }
+        res.json('Xóa thành công');
+    })
+    .catch(err => {
+        res.status(500).json('Lỗi server');
+    });
+});
+
+router.put('/:maphong', (req, res, next) => {
+    const maphong = req.params.maphong;
 
     RoomModel.findOneAndUpdate({ maphong: maphong }, req.body, { new: true })
         .then(updatedRoom => {
