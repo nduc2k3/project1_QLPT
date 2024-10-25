@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './Room.css';
 
-const Room = ({ room, onDelete,onUpdate }) => {
+const Room = ({ room, onDelete, onUpdate }) => {
     const [showDescription, setShowDescription] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
     const [newGiaphong, setNewGiaphong] = useState(room.giaphong);
@@ -33,10 +33,10 @@ const Room = ({ room, onDelete,onUpdate }) => {
             };
             await axios.put(`http://localhost:8080/api/room/${room.maphong}`, updatedRoom);
             alert("Cập nhật thành công");
-            onUpdate({ ...room, ...updatedRoom }); // Gọi hàm onUpdate với dữ liệu mới
-            setIsEditing(false); // Ẩn form chỉnh sửa
+            onUpdate({ ...room, ...updatedRoom });
+            setIsEditing(false);
         } catch (error) {
-            console.error("error",error);
+            console.error("error", error);
         }
     };
 
@@ -45,6 +45,8 @@ const Room = ({ room, onDelete,onUpdate }) => {
             <div className='image-room'>
                 <img id='img' src={room.hinhanh} alt='abc' />
             </div>
+
+            <h2 className='tenphong'>Phòng:{room.tenphong}</h2> {/* Thêm tên phòng */}
 
             {isEditing ? (
                 <div className='edit-room'>
@@ -82,7 +84,7 @@ const Room = ({ room, onDelete,onUpdate }) => {
             )}
 
             <div className='giaphong'>
-                <h3>Giá Phòng: {room.giaphong.toLocaleString()} VND</h3>
+                <h3>Giá Phòng: {parseInt(room.giaphong).toLocaleString('vi-VN')} VND</h3>
             </div>
             <div className='trangthai'>
                 <h3>Trạng Thái: {room.trangthaiphong ? 'Đã thuê' : 'Chưa thuê'}</h3>

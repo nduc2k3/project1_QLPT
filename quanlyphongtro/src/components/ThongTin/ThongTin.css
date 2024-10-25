@@ -1,0 +1,100 @@
+/* Đặt style cơ bản cho container */
+.container-information {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f4f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Style chung cho các dòng (rows) */
+  .container-information .row1-infor, 
+  .container-information .row2-infor, 
+  .container-information .row3-infor, 
+  .container-information .row4-infor, 
+  .container-information .row5-infor, 
+  .container-information .row6-form, 
+  .container-information .row7-form, 
+  .container-information .row8-form, 
+  .container-information .row9-form {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+  }
+  
+  /* Style chung cho các label */
+  .container-information label {
+    font-weight: bold;
+    margin-right: 10px;
+    flex: 1;
+  }
+  
+  /* Style cho các input */
+  .container-information input {
+    flex: 2;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  /* Style đặc biệt cho các input dạng checkbox */
+  .container-information input[type='checkbox'] {
+    margin-right: 5px;
+  }
+  
+  /* Style riêng cho dòng checkbox Nam/Nữ */
+  .container-information .row2-infor label {
+    display: inline-block;
+    margin-right: 20px;
+    font-weight: normal;
+  }
+  
+  /* Thêm khoảng cách giữa các ô input */
+  .container-information input:not([type='checkbox']) {
+    margin-left: 10px;
+  }
+  
+  /* Style cho các input dạng text */
+  .container-information input[type="text"], 
+  .container-information input[type="date"], 
+  .container-information input[type="number"] {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  /* Style cho ghi chú */
+  .container-information .ghichu-form {
+    height: 100px;
+  }
+  
+  /* Tăng độ rộng cho ô ảnh */
+  .container-information .anh-form {
+    width: 100%;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .container-information {
+      padding: 15px;
+    }
+    
+    .container-information .row1-infor, 
+    .container-information .row2-infor, 
+    .container-information .row3-infor, 
+    .container-information .row4-infor, 
+    .container-information .row5-infor, 
+    .container-information .row6-form, 
+    .container-information .row7-form, 
+    .container-information .row8-form, 
+    .container-information .row9-form {
+      flex-direction: column;
+    }
+  
+    .container-information label, 
+    .container-information input {
+      width: 100%;
+      margin: 5px 0;
+    }
+  }
+  

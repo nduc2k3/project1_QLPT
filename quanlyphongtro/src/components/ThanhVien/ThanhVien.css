@@ -1,0 +1,12 @@
+.container-information thead th {
+    text-align: center;
+    white-space: nowrap; /* Giữ cho tiêu đề nằm trên một hàng */
+    padding: 10px;
+    background-color: #f8f9fa; /* Màu nền tùy chỉnh */
+    border-bottom: 2px solid #dee2e6;
+}
+.container-information thead th:nth-child(5),
+.container-information tbody td:nth-child(5) {
+    min-width: 300px !important; /* Đặt độ rộng tối thiểu với !important */
+    word-wrap: break-word;
+}

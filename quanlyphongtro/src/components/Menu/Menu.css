@@ -3,45 +3,60 @@ body, html {
     padding: 0;
     height: 100%; 
     box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9; /* Màu nền nhẹ nhàng */
 }
 
 .menu-container {
     display: flex;
-    height: 100vh; /* Đảm bảo chiều cao chiếm toàn bộ màn hình */
+    height: 100vh;
 }
 
 .side-menu {
-    width: 170px; 
-    background-color: bisque;
+    width: 200px; 
+    background-color: #343a40; /* Màu xám đậm cho menu */
     padding: 20px;
-    flex-shrink: 0; /* Đảm bảo không bị co lại */
+    flex-shrink: 0;
 }
 
 .side-menu h2 {
-    margin: 0 0 20px;
-    font-size: 20px;
+    margin: 0 0 30px;
+    font-size: 22px;
+    color: #ffffff; /* Màu chữ trắng */
+    text-align: center;
+    letter-spacing: 2px;
 }
 
 .side-menu ul {
     list-style: none; 
-    padding: 0; /* Bỏ padding mặc định */
+    padding: 0;
 }
 
 .side-menu ul li {
-    margin-bottom: 10px; /* Khoảng cách giữa các mục */
+    margin-bottom: 15px;
 }
 
 .side-menu ul a, .ChangePasswd, .Logout {
-    text-decoration: none; 
-    color: black; 
-    display: flex;
-    padding: 10px; 
-    border: none; 
-    background-color: #fff;
-    border-radius: 8px;
-    width: 80%;
-    align-items: center;
-    justify-content: center;
+    text-decoration: none;
+    color: #ffffff; /* Màu chữ trắng */
+    display: block;
+    padding: 10px 15px;
+    background-color: #495057; /* Màu nền nhẹ hơn */
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    font-weight: bold;
+}
+
+.side-menu ul a:hover, .ChangePasswd:hover, .Logout:hover {
+    background-color: #17a2b8; /* Màu xanh khi hover */
+}
+
+.ChangePasswd, .Logout {
+    background-color: #007bff; /* Màu xanh dương cho các button */
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
 }
 
 .ChangePasswd {
@@ -52,64 +67,49 @@ body, html {
     margin-top: 20px;
 }
 
-.ChangePasswd, .Logout {
-    display: flex;
-    justify-content: center;
-    background-color: aliceblue;
-    color: black;
-    border-radius: 20px;
-    cursor: pointer;
-    align-items: center;
-}
-
-.ChangePasswd:hover, .Logout:hover, .side-menu ul a:hover {
-    background-color: aquamarine;
-}
-
 .beside {
-    flex-grow: 1; /* Đảm bảo phần này chiếm phần còn lại */
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
-    height: 100vh; /* Đảm bảo chiều cao đầy đủ của màn hình */
+    height: 100vh;
+    background-color: #e9ecef; /* Nền sáng hơn cho content */
 }
 
 .header {
     display: flex;
     flex-direction: row;
     padding: 20px;
-    background-color: bisque;
-    width: 100%;
-    height: 60px; /* Cố định chiều cao của header */
-    box-sizing: border-box;
-    flex-shrink: 0; /* Đảm bảo không bị co lại */
+    background-color: #6c757d; /* Màu xám trung tính */
+    color: #ffffff;
+    align-items: center;
 }
 
 .hamburger {
-    width: 50px;
-    height: 25px;
+    width: 30px;
+    height: 20px;
     cursor: pointer;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin-right: 10px;
 }
 
 .hamburger .bar {
     width: 100%;
-    height: 6px;
-    background-color: black;
+    height: 4px;
+    background-color: #ffffff;
     border-radius: 6px;
 }
 
 .fontawesome-icon {
     margin-left: 20px;
+    color: #ffffff;
 }
 
 .content {
-    flex-grow: 1; /* Đảm bảo nội dung chiếm phần còn lại sau header */
+    flex-grow: 1;
     padding: 20px;
-    background-color: #fff;
-    overflow-y: auto; /* Thêm thanh cuộn nếu nội dung quá dài */
+    background-color: #ffffff;
+    overflow-y: auto;
 }
 
 .fontawesome-icons {

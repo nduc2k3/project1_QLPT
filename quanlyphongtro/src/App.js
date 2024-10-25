@@ -6,6 +6,8 @@ import Electricity from './pages/Electricity/index';
 import Water from './pages/Water/index';
 import Menu from './components/Menu';
 import Login from './components/Login';
+import Tenants from './pages/Tenants/index';
+import AddTenant from './components/AddTenant/index';
 import './App.css';
 
 function App() {
@@ -32,6 +34,8 @@ function App() {
           <Route path="/rooms" element={<Menu><Rooms /></Menu>} />
           <Route path="/electricity" element={<Menu><Electricity/></Menu>}/>
           <Route path="/water" element={<Menu><Water/></Menu>}/>
+          <Route path="/tenants" element={<Menu><Tenants/></Menu>}/>
+          <Route path="/addtenant" element={<AddTenant/>}/>
         </>
       )}
     </Routes>
