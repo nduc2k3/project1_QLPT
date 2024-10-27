@@ -14,6 +14,7 @@ function Rooms() {
     const [filteredRooms, setFilteredRooms] = useState([]);
     const [roomSearch, setRoomSearch] = useState("");
     const [noDataMessage, setNoDataMessage] = useState("");
+
     const handleRoomStatusChange = (item) => {
         setStatusRoom(item);
     };
@@ -72,6 +73,7 @@ function Rooms() {
             setNoDataMessage("");
         }
 
+        // Reset dropdowns and search input
         setStatusRoom("Trạng thái phòng");
         setStatusFee("Trạng thái phí");
         setRoomSearch("");
@@ -122,7 +124,7 @@ function Rooms() {
                                 key={index} 
                                 room={room} 
                                 onDelete={handleDeleteRoom} 
-                                onUpdate={handleUpdateRoom} // Truyền hàm onUpdate vào đây
+                                onUpdate={handleUpdateRoom} 
                             />
                         ))
                     )}

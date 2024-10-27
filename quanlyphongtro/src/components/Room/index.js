@@ -21,7 +21,6 @@ const Room = ({ room, onDelete, onUpdate }) => {
         } catch (error) {
             console.error("Lỗi", error);
             alert("Lỗi!");
-            console.log("loi",error);
         }
     };
 

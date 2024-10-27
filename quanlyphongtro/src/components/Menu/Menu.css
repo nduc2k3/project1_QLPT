@@ -1,10 +1,15 @@
-body, html {
+/* Tắt cuộn trên body và html */
+html, body {
     margin: 0;
     padding: 0;
     height: 100%; 
-    box-sizing: border-box;
     font-family: 'Arial', sans-serif;
     background-color: #f4f4f9; /* Màu nền nhẹ nhàng */
+}
+
+/* Đặt lại box-sizing cho menu */
+.menu-container, .side-menu {
+    box-sizing: content-box;
 }
 
 .menu-container {
@@ -17,6 +22,7 @@ body, html {
     background-color: #343a40; /* Màu xám đậm cho menu */
     padding: 20px;
     flex-shrink: 0;
+    overflow: hidden; /* Tắt cuộn trong side-menu */
 }
 
 .side-menu h2 {
@@ -52,11 +58,19 @@ body, html {
     background-color: #17a2b8; /* Màu xanh khi hover */
 }
 
+/* Đặt kích thước đồng đều cho các nút */
 .ChangePasswd, .Logout {
+    width: 160px; /* Đặt cùng chiều rộng */
+    height: 40px; /* Đặt cùng chiều cao */
     background-color: #007bff; /* Màu xanh dương cho các button */
     color: #ffffff;
     border: none;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    border-radius: 6px;
 }
 
 .ChangePasswd {
@@ -73,6 +87,7 @@ body, html {
     flex-direction: column;
     height: 100vh;
     background-color: #e9ecef; /* Nền sáng hơn cho content */
+    overflow: hidden; /* Tắt cuộn trong bên cạnh */
 }
 
 .header {
@@ -109,7 +124,7 @@ body, html {
     flex-grow: 1;
     padding: 20px;
     background-color: #ffffff;
-    overflow-y: auto;
+    overflow-y: auto; /* Cho phép cuộn trong content */
 }
 
 .fontawesome-icons {
