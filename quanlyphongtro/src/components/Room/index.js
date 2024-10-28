@@ -88,8 +88,8 @@ const Room = ({ room, onDelete, onUpdate }) => {
             </div>
             <div className='trangthai'>
                 <h3>Trạng Thái: {room.trangthaiphong ? 'Đã thuê' : 'Chưa thuê'}</h3>
+                <h3>Trạng Thái Phí: {room.trangthaitt ? 'Đã trả' : 'Chưa trả'}</h3>
             </div>
-
             {showDescription && (
                 <div className="room-description">
                     <h3 style={{ fontSize: '12px', color: 'red' }}>Mô tả phòng:</h3>

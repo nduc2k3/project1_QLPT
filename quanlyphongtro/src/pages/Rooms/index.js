@@ -14,6 +14,7 @@ function Rooms() {
     const [filteredRooms, setFilteredRooms] = useState([]);
     const [roomSearch, setRoomSearch] = useState("");
     const [noDataMessage, setNoDataMessage] = useState("");
+    const [closeDropdown, setCloseDropdown] = useState(false); // State để đóng dropdown
 
     const handleRoomStatusChange = (item) => {
         setStatusRoom(item);
@@ -73,10 +74,14 @@ function Rooms() {
             setNoDataMessage("");
         }
 
-        // Reset dropdowns and search input
+        // Đóng dropdowns và reset giá trị tìm kiếm
+        setCloseDropdown(true);
         setStatusRoom("Trạng thái phòng");
         setStatusFee("Trạng thái phí");
         setRoomSearch("");
+
+        // Sau đó reset lại trạng thái đóng dropdowns
+        setTimeout(() => setCloseDropdown(false), 0);
     };
 
     const totalAvailable = listRoom.filter(room => room.trangthaiphong === false).length;
@@ -91,11 +96,13 @@ function Rooms() {
                         defaultItem={statusRoom}
                         items={item1}
                         onItemSelected={handleRoomStatusChange}
+                        closeDropdown={closeDropdown}
                     />
                     <Dropdown
                         defaultItem={statusFee}
                         items={item2}
                         onItemSelected={handleFeeStatusChange}
+                        closeDropdown={closeDropdown}
                     />
                     <input 
                         type="text" 

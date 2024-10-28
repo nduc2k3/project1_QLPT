@@ -10,6 +10,13 @@ const Dropdown = (props) => {
     setSelectedItem(props.defaultItem || 'Select an option');
   }, [props.defaultItem]);
 
+  // Theo dõi sự thay đổi của closeDropdown để đóng menu
+  useEffect(() => {
+    if (props.closeDropdown) {
+      setIsOpen(false);
+    }
+  }, [props.closeDropdown]);
+
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };

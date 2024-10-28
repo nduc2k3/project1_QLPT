@@ -1,57 +1,116 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Table from 'react-bootstrap/Table';
 import Dropdown from '../../components/DropDown';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Electricity.css';
+import axios from "axios";
+
 function Electricity() {
-    // Dữ liệu mẫu về chỉ số điện
-    const data = [
-        { nha: 'Nhà A', phong: 'Phòng 101', khach: 'Nguyễn Văn A', chiSoDien: 120 },
-        { nha: 'Nhà A', phong: 'Phòng 102', khach: 'Trần Văn B', chiSoDien: 150 },
-        { nha: 'Nhà B', phong: 'Phòng 201', khach: 'Lê Thị C', chiSoDien: 130 },
-        { nha: 'Nhà B', phong: 'Phòng 202', khach: 'Phạm Văn D', chiSoDien: 140 },
-    ];
+    const [listElectric, setListElectric] = useState([]);
+    const [month, setMonth] = useState("Tháng/Năm");
+    const [noData, setNoData] = useState(false);
+
     const item3 = [
-        "01/2024","02/2024","03/2024","04/2024","05/2024","06/2024","07/2024","08/2024","09/2024","10/2024","11/2024","12/2024"
+        "Tất cả",
+        "01/2024", "02/2024", "03/2024", "04/2024", "05/2024", "06/2024",
+        "07/2024", "08/2024", "09/2024", "10/2024", "11/2024", "12/2024"
     ];
-    const[month,setMonth] = useState("Tháng/Năm");
-    const handleMonthStatusChange = (item) =>{
-       setMonth(item);
-    }
-    return ( 
+
+    // Hàm gọi API để lấy toàn bộ số điện
+    const fetchAllElectric = async () => {
+        try {
+            const response = await axios.get('http://localhost:8080/api/diennuoc/sodien');
+            const dataD = response.data;
+
+            if (dataD.length > 0) {
+                setListElectric(dataD);
+                setNoData(false);
+            } else {
+                setListElectric([]);
+                setNoData(true); // Không có dữ liệu
+            }
+        } catch (error) {
+            console.error("Error fetching data:", error);
+            setListElectric([]);
+            setNoData(true); // Lỗi khi lấy dữ liệu, giả sử là không có dữ liệu
+        }
+    };
+
+    // Gọi API để lấy dữ liệu ban đầu
+    useEffect(() => {
+        fetchAllElectric();
+    }, []);
+
+    const handleMonthStatusChange = async (selectedMonthYear) => {
+        setMonth(selectedMonthYear);
+
+        // Kiểm tra nếu người dùng chọn "Tất cả"
+        if (selectedMonthYear === "Tất cả") {
+            fetchAllElectric(); // Gọi hàm lấy toàn bộ dữ liệu
+            return; // Kết thúc hàm để không gọi API tháng/năm
+        }
+
+        // Tách tháng và năm từ chuỗi đã chọn
+        const [selectedMonth, selectedYear] = selectedMonthYear.split('/');
+
+        // Gọi API với tháng và năm đã chọn
+        try {
+            const response = await axios.get(`http://localhost:8080/api/diennuoc/sodienmonth?thang=${selectedMonth}&nam=${selectedYear}`);
+            const dataD = response.data;
+
+            // Kiểm tra nếu dữ liệu có hay không
+            if (dataD.length > 0) {
+                setListElectric(dataD);
+                setNoData(false);
+            } else {
+                setListElectric([]);
+                setNoData(true); // Không có dữ liệu
+            }
+        } catch (error) {
+            console.error("Error fetching data:", error);
+            setListElectric([]);
+            setNoData(true); // Lỗi khi lấy dữ liệu, giả sử là không có dữ liệu
+        }
+    };
+
+    return (
         <div className="container-electricity">
-          <div className="header-electricity">
-            <h2>Tháng/Năm</h2>
-            <Dropdown
-              defaultItem={month}
-              items={item3}
-              onItemSelected = {handleMonthStatusChange}
-            />
-          </div>
-          <div className="table-electricity">
-            <Table striped bordered hover>
-              <thead>
-                <tr>
-                    <th>Nhà</th>
-                    <th>Phòng</th>
-                    <th>Khách</th>
-                    <th>Chỉ Số Điện</th>
-                </tr>
-              </thead>
-              <tbody>
-                {data.map((row, index) => (
-                  <tr key={index}>
-                    <td>{row.nha}</td>
-                    <td>{row.phong}</td>
-                    <td>{row.khach}</td>
-                    <td>{row.chiSoDien}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </Table>
-          </div>
+            <div className="header-electricity">
+                <h2>Tháng/Năm</h2>
+                <Dropdown
+                    defaultItem={month}
+                    items={item3}
+                    onItemSelected={handleMonthStatusChange}
+                />
+            </div>
+            <div className="table-electricity">
+                {noData ? (
+                    <p>Không có dữ liệu</p>
+                ) : (
+                    <Table striped bordered hover>
+                        <thead>
+                            <tr>
+                                <th>Nhà</th>
+                                <th>Phòng</th>
+                                <th>Khách</th>
+                                <th>Chỉ Số Điện</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {listElectric.map((row, index) => (
+                                <tr key={index}>
+                                    <td>{row.tang}</td>
+                                    <td>{row.tenphong}</td>
+                                    <td>{row.tenkt}</td>
+                                    <td>{row.sodien}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </Table>
+                )}
+            </div>
         </div>
-     );
+    );
 }
 
 export default Electricity;
