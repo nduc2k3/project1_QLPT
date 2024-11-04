@@ -30,11 +30,11 @@ router.post('/',(req,res,next)=>{
     })
 })
 
-router.put('/:id',(req,res,next)=>{
-    var id = req.params.id
+router.put('/:email',(req,res,next)=>{
+    var email = req.params.email
     var newpass = req.body.newPass
 
-    AccModel.findByIdAndUpdate(id,{
+    AccModel.findByIdAndUpdate(email,{
         password : newpass
     })
     .then(data=>{
@@ -45,10 +45,10 @@ router.put('/:id',(req,res,next)=>{
     })
 })
 
-router.delete('/:id',(req,res,next)=>{
-    var id = req.params.id
+router.delete('/:email',(req,res,next)=>{
+    var email = req.params.email
     AccModel.deleteOne({
-        _id : id
+        email : email
     })
     .then(data=>{
         res.json('Xoa thanh cong')
@@ -58,9 +58,9 @@ router.delete('/:id',(req,res,next)=>{
     })
 })
 
-router.get('/:id',(req,res,next)=>{
-    var id = req.params.id
-    AccModel.findById(id)
+router.get('/:email',(req,res,next)=>{
+    var email = req.params.email
+    AccModel.findById(email)
     .then(data=>{
         res.json(data)
 

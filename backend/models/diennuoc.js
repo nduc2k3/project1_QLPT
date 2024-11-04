@@ -8,7 +8,9 @@ const DnSchema = new Schema({
     thang : Number,
     nam : Number,
     sodien : Number,
-    sonuoc : Number
+    sonuoc : Number,
+    giadien : Number,
+    gianuoc : Number
 
 },{
     collection : "diennuoc"
