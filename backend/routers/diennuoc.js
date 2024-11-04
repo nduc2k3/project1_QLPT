@@ -24,13 +24,17 @@ router.post('/',(req,res,next)=>{
     var nam = req.body.nam
     var sodien = req.body.sodien
     var sonuoc = req.body.sonuoc
+    var giadien = req.body.giadien
+    var gianuoc = req.body.gianuoc
     DnModel.create({
         madn : madn,
         makt : makt,
         thang : thang,
         nam : nam,
         sodien : sodien,
-        sonuoc : sonuoc
+        sonuoc : sonuoc,
+        giadien : giadien,
+        gianuoc : gianuoc
     
     })
     .then(data=>{

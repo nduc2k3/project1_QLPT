@@ -13,7 +13,7 @@ const STSchema = new Schema({
     mast: String,
     makt: String,
     madv: String,
-    soluong: String
+    soluong: Number
 }, {
     collection: "service_tenant"
 });

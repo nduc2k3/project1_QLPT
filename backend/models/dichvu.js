@@ -5,7 +5,7 @@ mongoose.connect('mongodb://localhost/DB0001');
 const DvSchema = new Schema({
     madv : String,
     tendv : String,
-    giatien : String
+    giatien : Number
 
 },{
     collection : "dichvu"
