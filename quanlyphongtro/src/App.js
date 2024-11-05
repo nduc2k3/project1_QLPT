@@ -30,11 +30,11 @@ function App() {
         <>
           {/* Khi người dùng đã đăng nhập, cho phép truy cập các trang */}
           <Route path="/" element={<Navigate to="/home" />} />
-          <Route path="/home" element={<Menu><Home /></Menu>} />
-          <Route path="/rooms" element={<Menu><Rooms /></Menu>} />
-          <Route path="/electricity" element={<Menu><Electricity/></Menu>}/>
-          <Route path="/water" element={<Menu><Water/></Menu>}/>
-          <Route path="/tenants" element={<Menu><Tenants/></Menu>}/>
+          <Route path="/home" element={<Menu menuId={1}><Home /></Menu>} />
+          <Route path="/rooms" element={<Menu menuId={2} ><Rooms /></Menu>} />
+          <Route path="/electricity" element={<Menu menuId={3}><Electricity/></Menu>}/>
+          <Route path="/water" element={<Menu menuId={4}><Water/></Menu>}/>
+          <Route path="/tenants" element={<Menu menuId={5}><Tenants/></Menu>}/>
           <Route path="/addtenant" element={<AddTenant/>}/>
         </>
       )}

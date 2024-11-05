@@ -73,7 +73,7 @@ function Water() {
     return (
         <div className="container-water">
             <div className="header-water">
-                <h2>Tháng/Năm</h2>
+                <h2 style={{paddingRight: '12px'}}>Tháng/Năm</h2>
                 <Dropdown
                     defaultItem={month}
                     items={item3}

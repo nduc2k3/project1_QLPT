@@ -153,3 +153,11 @@
     padding: 10px; /* Khoảng cách trong ô */
     text-align: left; /* Căn trái nội dung */
 }
+.table-tenants th {
+    text-align: center;
+    vertical-align: middle;
+}
+.table-tenants td {
+    text-align: center;
+    vertical-align: middle;
+}

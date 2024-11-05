@@ -76,7 +76,7 @@ function Electricity() {
     return (
         <div className="container-electricity">
             <div className="header-electricity">
-                <h2>Tháng/Năm</h2>
+                <h2 style={{paddingRight: '12px'}}>Tháng/Năm</h2>
                 <Dropdown
                     defaultItem={month}
                     items={item3}

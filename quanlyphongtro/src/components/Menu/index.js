@@ -1,22 +1,23 @@
 // Menu.js
 import React from 'react';
 import './Menu.css';
-import {Link} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileMedical, faUser } from '@fortawesome/free-solid-svg-icons';
-const Menu = ({children}) => {
+const Menu = ({menuId, children}) => {
+    const navigate = useNavigate()
     return (
         <>
          <div className="menu-container">
             <div className="side-menu">
                 <h2>Quản Lý Nhà Trọ</h2>
                 <ul>
-                    <li><Link to="/home">Trang Chủ</Link></li>
-                    <li><Link to="/rooms">Phòng</Link></li>
-                    <li><Link to="/electricity">Chỉ Số Điện</Link></li>
-                    <li><Link to="/water">Chỉ Số Nước</Link></li>
-                    <li><Link to="/tenants">Danh Sách Khách Thuê</Link></li>
-                    <li><Link to="/involde-details">Chi Tiết Hóa Đơn</Link></li>
+                    <li className={` ${menuId === 1 ? 'active' : ''}`} onClick={() => {navigate("/home")}}>Trang Chủ</li>
+                    <li className={` ${menuId === 2 ? 'active' : ''}`} onClick={() => {navigate("/rooms")}}>Phòng</li>
+                    <li className={` ${menuId === 3 ? 'active' : ''}`} onClick={() => {navigate("/electricity")}}>Chỉ Số Điện</li>
+                    <li className={` ${menuId === 4 ? 'active' : ''}`} onClick={() => {navigate("/water")}}>Chỉ Số Nước</li>
+                    <li className={` ${menuId === 5 ? 'active' : ''}`} onClick={() => {navigate("/tenants")}}>DS Khách Thuê</li>
+                    <li className={` ${menuId === 6 ? 'active' : ''}`} onClick={() => {navigate("/involde-details")}}>Chi Tiết Hóa Đơn</li>
                     <div className='btnChangePasswd'>
                         <button className='ChangePasswd'>Đổi Mật Khẩu</button>
                     </div>

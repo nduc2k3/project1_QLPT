@@ -39,22 +39,27 @@ html, body {
 }
 
 .side-menu ul li {
+    cursor: pointer;
     margin-bottom: 15px;
 }
 
-.side-menu ul a, .ChangePasswd, .Logout {
+.side-menu ul li, .ChangePasswd, .Logout {
     text-decoration: none;
     color: #ffffff; /* Màu chữ trắng */
     display: block;
     padding: 10px 15px;
-    background-color: #495057; /* Màu nền nhẹ hơn */
+    background-color: #495057; 
     border-radius: 6px;
     transition: background-color 0.3s ease;
     text-align: center;
     font-weight: bold;
 }
+.side-menu ul li a {
+    text-decoration: none;
+    color: #ffffff; /* Màu chữ trắng */
+}
 
-.side-menu ul a:hover, .ChangePasswd:hover, .Logout:hover {
+.side-menu ul li:hover, .ChangePasswd:hover, .Logout:hover {
     background-color: #17a2b8; /* Màu xanh khi hover */
 }
 
@@ -131,4 +136,8 @@ html, body {
     margin-left: auto;
     display: flex;
     flex-direction: row;
+}
+
+.side-menu ul li.active {
+    background-color:aqua !important;
 }

@@ -15,7 +15,7 @@ function Tenants() {
     const [room, setRoom] = useState('');
     const [noData, setNoData] = useState(false);
     const [searchClickCount, setSearchClickCount] = useState(0);
-    const [selectedMakt, setSelectedMakt] = useState(null); // Trạng thái để lưu mã khách đã chọn
+    const [selectedMakt, setSelectedMakt] = useState(null);
     const [selectedEmployee, setSelectedEmployee] = useState(0);
 
     const fetchTenants = useCallback(async () => {
@@ -62,15 +62,15 @@ function Tenants() {
             return;
         }
         setSelectedEmployee(makt);
-        setSelectedMakt(makt); // Lưu mã khách đã chọn
+        setSelectedMakt(makt);
     };
 
     const handleDeleteClick = async () => {
         if (selectedMakt) {
             try {
-                await axios.delete(`http://localhost:8080/api/tenant/${selectedMakt}`); // Gọi API xóa
-                fetchTenants(); // Cập nhật lại danh sách sau khi xóa
-                setSelectedMakt(null); // Reset mã khách đã chọn
+                await axios.delete(`http://localhost:8080/api/tenant/${selectedMakt}`);
+                fetchTenants();
+                setSelectedMakt(null);
             } catch (error) {
                 console.error("Lỗi khi xóa khách thuê:", error);
             }
@@ -155,10 +155,10 @@ function Tenants() {
                 {noData ? (
                     <p>Không có dữ liệu</p>
                 ) : (
-                    <div className="table-tenants">
+                    <table className="table-tenants-table">
                         <thead>
                             <tr>
-                                <th>Họ tên</th>
+                                <th style={{width:'200px'}}>Họ tên</th>
                                 <th>Ngày sinh</th>
                                 <th>CCCD</th>
                                 <th>SĐT</th>
@@ -173,10 +173,11 @@ function Tenants() {
                         </thead>
                         <tbody>
                             {tenants.map((tenant, index) => (
-                                <tr key={index} 
-                                onClick={() => handleRowClick(tenant.makt)} 
-                                style={{ cursor: 'pointer'}}
-                                className={`row-employee ${parseInt(selectedEmployee) === parseInt(tenant.makt) ? 'active' : ''}`}
+                                <tr
+                                    key={index}
+                                    onClick={() => handleRowClick(tenant.makt)}
+                                    style={{ cursor: 'pointer' }}
+                                    className={`row-employee ${parseInt(selectedEmployee) === parseInt(tenant.makt) ? 'active' : ''}`}
                                 >
                                     <td>{tenant.tenkt}</td>
                                     <td>{formatDate(tenant.ngaysinh)}</td>
@@ -186,13 +187,13 @@ function Tenants() {
                                     <td>{tenant.tang}</td>
                                     <td>{formatDate(tenant.ngaythue)}</td>
                                     <td>{formatDate(tenant.ngayhethanhd)}</td>
-                                    <td>{tenant.tienphong}</td>
-                                    <td>{tenant.dadong}</td>
-                                    <td>{tenant.conlai}</td>
+                                    <td>{parseInt(tenant.tienphong).toLocaleString('vi-VN')}</td>
+                                    <td>{parseInt(tenant.dadong).toLocaleString('vi-VN')}</td>
+                                    <td>{parseInt(tenant.conlai).toLocaleString('vi-VN')}</td>
                                 </tr>
                             ))}
                         </tbody>
-                    </div>
+                    </table>
                 )}
             </div>
         </div>
