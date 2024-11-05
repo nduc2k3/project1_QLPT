@@ -6,6 +6,10 @@ function DichVu() {
     return (  
       <div className="container-dichvu">
         <div className="table-container">
+          <div className="makt-dichvu">
+            <label>Mã Khách Thuê</label>
+            <input className="makt-dichvu"></input>
+          </div>
           <Table striped bordered hover> {/* Sử dụng Table từ react-bootstrap */}
             <thead>
               <tr>

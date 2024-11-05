@@ -5,6 +5,10 @@ import './ThanhVien.css';
 function ThanhVien() {
     return ( 
       <div className="container-thanhvien">
+        <div className="makt-thanhvien">
+            <label>Mã Khách Thuê</label>
+            <input className="makt-thanhvien"></input>
+        </div>
         <Table striped bordered hover className="table-thanhvien">
             <thead>
                 <tr>
