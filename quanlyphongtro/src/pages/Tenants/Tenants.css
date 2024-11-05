@@ -128,12 +128,28 @@
     font-weight: bold;
 }
 
-/* Zebra striping for rows */
-.table-tenants tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
 
 /* Quayve class styling */
 .quayve {
     margin-left: auto; /* Dùng auto để căn giữa trong flex */
+}
+
+ .row-employee.active {
+    background-color:aqua;
+}
+
+.row-employee:hover {
+    background-color: #ccc;
+}
+
+.table-tenants {
+    width: 100%;
+    border-collapse: collapse; /* Để các viền không bị chồng lên nhau */
+}
+
+.table-tenants th,
+.table-tenants td {
+    border: 1px solid #ccc; /* Viền màu xám cho ô */
+    padding: 10px; /* Khoảng cách trong ô */
+    text-align: left; /* Căn trái nội dung */
 }

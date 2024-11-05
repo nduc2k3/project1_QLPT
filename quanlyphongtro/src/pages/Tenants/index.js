@@ -2,7 +2,6 @@ import './Tenants.css';
 import React, { useEffect, useState, useCallback } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileExcel, faPrint, faTrash, faMagnifyingGlass, faPlus } from '@fortawesome/free-solid-svg-icons';
-import Table from 'react-bootstrap/Table';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -17,6 +16,7 @@ function Tenants() {
     const [noData, setNoData] = useState(false);
     const [searchClickCount, setSearchClickCount] = useState(0);
     const [selectedMakt, setSelectedMakt] = useState(null); // Trạng thái để lưu mã khách đã chọn
+    const [selectedEmployee, setSelectedEmployee] = useState(0);
 
     const fetchTenants = useCallback(async () => {
         try {
@@ -57,6 +57,11 @@ function Tenants() {
     };
 
     const handleRowClick = (makt) => {
+        if (selectedEmployee === makt) {
+            setSelectedEmployee(0);
+            return;
+        }
+        setSelectedEmployee(makt);
         setSelectedMakt(makt); // Lưu mã khách đã chọn
     };
 
@@ -150,7 +155,7 @@ function Tenants() {
                 {noData ? (
                     <p>Không có dữ liệu</p>
                 ) : (
-                    <Table striped bordered hover>
+                    <div className="table-tenants">
                         <thead>
                             <tr>
                                 <th>Họ tên</th>
@@ -168,7 +173,11 @@ function Tenants() {
                         </thead>
                         <tbody>
                             {tenants.map((tenant, index) => (
-                                <tr key={index} onClick={() => handleRowClick(tenant.makt)} style={{ cursor: 'pointer', backgroundColor: selectedMakt === tenant.makt ? '#f2f2f2' : 'transparent' }}>
+                                <tr key={index} 
+                                onClick={() => handleRowClick(tenant.makt)} 
+                                style={{ cursor: 'pointer'}}
+                                className={`row-employee ${parseInt(selectedEmployee) === parseInt(tenant.makt) ? 'active' : ''}`}
+                                >
                                     <td>{tenant.tenkt}</td>
                                     <td>{formatDate(tenant.ngaysinh)}</td>
                                     <td>{tenant.cccd}</td>
@@ -183,7 +192,7 @@ function Tenants() {
                                 </tr>
                             ))}
                         </tbody>
-                    </Table>
+                    </div>
                 )}
             </div>
         </div>
