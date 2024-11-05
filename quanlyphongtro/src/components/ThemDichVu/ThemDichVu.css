@@ -1,0 +1,77 @@
+/* Container của form */
+.container-ThemDV {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 20px;
+    border: 2px solid #4CAF50;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Label cho các trường nhập liệu */
+.container-ThemDV label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Các trường nhập liệu */
+.container-ThemDV input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+.container-ThemDV input:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+/* Nút Lưu */
+.save-them {
+    width: 48%;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-right: 4%;
+}
+
+.save-them:hover {
+    background-color: #45a049;
+}
+
+/* Nút Quay Lại */
+.back-them {
+    width: 48%;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    background-color: #e0e0e0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.back-them:hover {
+    background-color: #d5d5d5;
+}
+
+/* Khoảng cách giữa các nút */
+.container-ThemDV .save-them,
+.container-ThemDV .back-them {
+    display: inline-block;
+}

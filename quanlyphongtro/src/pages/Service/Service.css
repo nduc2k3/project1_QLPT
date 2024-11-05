@@ -1,0 +1,20 @@
+.header-service{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px; /* Khoảng cách giữa các mục */
+    margin-bottom: 20px;
+}
+.header-service p{
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    border: 2px solid #4CAF50; /* Màu viền (ví dụ: xanh lá) */
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+.header-service p.active {
+    background-color: #4CAF50; /* Màu nền khi được chọn */
+    color: #fff;              /* Màu chữ khi được chọn */
+    border-color: #388E3C;    /* Màu viền khi được chọn */
+}

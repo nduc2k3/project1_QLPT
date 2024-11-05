@@ -8,6 +8,8 @@ import Menu from './components/Menu';
 import Login from './components/Login';
 import Tenants from './pages/Tenants/index';
 import AddTenant from './components/AddTenant/index';
+import Service from './pages/Service/index';
+import ThemDichVu from './components/ThemDichVu/index';
 import './App.css';
 
 function App() {
@@ -35,6 +37,8 @@ function App() {
           <Route path="/electricity" element={<Menu menuId={3}><Electricity/></Menu>}/>
           <Route path="/water" element={<Menu menuId={4}><Water/></Menu>}/>
           <Route path="/tenants" element={<Menu menuId={5}><Tenants/></Menu>}/>
+          <Route path='/service' element={<Menu menuId={6}><Service/></Menu>}/>
+          <Route path='/addservice' element={<Menu><ThemDichVu/></Menu>}/>
           <Route path="/addtenant" element={<AddTenant/>}/>
         </>
       )}

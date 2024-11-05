@@ -17,7 +17,8 @@ const Menu = ({menuId, children}) => {
                     <li className={` ${menuId === 3 ? 'active' : ''}`} onClick={() => {navigate("/electricity")}}>Chỉ Số Điện</li>
                     <li className={` ${menuId === 4 ? 'active' : ''}`} onClick={() => {navigate("/water")}}>Chỉ Số Nước</li>
                     <li className={` ${menuId === 5 ? 'active' : ''}`} onClick={() => {navigate("/tenants")}}>DS Khách Thuê</li>
-                    <li className={` ${menuId === 6 ? 'active' : ''}`} onClick={() => {navigate("/involde-details")}}>Chi Tiết Hóa Đơn</li>
+                    <li className={` ${menuId === 6 ? 'active' : ''}`} onClick={() => {navigate("/service")}}>Dịch Vụ</li>
+                    <li className={` ${menuId === 7 ? 'active' : ''}`} onClick={() => {navigate("/involde-details")}}>Chi Tiết Hóa Đơn</li>
                     <div className='btnChangePasswd'>
                         <button className='ChangePasswd'>Đổi Mật Khẩu</button>
                     </div>
