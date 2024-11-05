@@ -321,6 +321,66 @@ router.get('/danhsach', async (req, res) => {
     }
 });
 
+router.get('/listdv', async (req, res) => {
+    try {
+      const result = await TenantModel.aggregate([
+        {
+          $lookup: {
+            from: "room",
+            localField: "maphong",  // Khóa ngoại trong "tenant"
+            foreignField: "maphong", // Khóa chính trong "room"
+            as: "room_info"
+          }
+        },
+        { $unwind: { path: "$room_info", preserveNullAndEmptyArrays: false } }, // Chỉ giữ lại những khách thuê có phòng
+  
+        {
+          $lookup: {
+            from: "service_tenant",
+            localField: "makt",  // Khóa ngoại trong "tenant"
+            foreignField: "makt", // Khóa chính trong "service_tenant"
+            as: "service_info"
+          }
+        },
+        { $unwind: { path: "$service_info", preserveNullAndEmptyArrays: false } }, // Chỉ giữ lại những khách thuê có dịch vụ
+  
+        {
+          $lookup: {
+            from: "dichvu",
+            localField: "service_info.madv",  // Khóa ngoại trong "service_tenant"
+            foreignField: "madv", // Khóa chính trong "dichvu"
+            as: "dichvu_info"
+          }
+        },
+        { $unwind: { path: "$dichvu_info", preserveNullAndEmptyArrays: false } }, // Chỉ giữ lại những khách thuê có dịch vụ
+  
+        // Lọc khách thuê có ít nhất 1 dịch vụ
+        {
+          $match: {
+            "service_info": { $ne: [] }  // Lọc những khách thuê có dịch vụ (service_info không được rỗng)
+          }
+        },
+  
+        {
+          $project: {
+            _id : 0,
+            tenkt: 1,
+            tenphong: "$room_info.tenphong",
+            tendv: "$dichvu_info.tendv",
+            giatien: "$dichvu_info.giatien",
+            soluong: "$service_info.soluong"
+          }
+        }
+      ]);
+  
+      console.log(result); // Kiểm tra kết quả
+      res.json(result);
+    } catch (error) {
+      console.error('Error occurred:', error);
+      res.status(500).json({ error: 'An error occurred while fetching data' });
+    }
+  });
+
 
 
 module.exports = router;

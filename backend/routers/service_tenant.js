@@ -3,6 +3,7 @@ const router = express.Router();
 
 const STModel = require('../models/service_tenant')
 
+
 router.get('/',(req,res,next)=>{
     STModel.find({})
     .then(data=>{
@@ -61,8 +62,8 @@ router.delete('/:mast',(req,res,next)=>{
     })
 })
 
-router.get('/:makt',(req,res,next)=>{
-    var makt = req.params.makt
+router.get('/:mast',(req,res,next)=>{
+    var mast = req.params.mast
     STModel.find({makt : makt})
     .then(data=>{
         res.json(data)
@@ -74,5 +75,7 @@ router.get('/:makt',(req,res,next)=>{
 
 })
 
+
+        
 
 module.exports = router
