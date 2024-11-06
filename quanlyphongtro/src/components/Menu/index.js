@@ -5,7 +5,11 @@ import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileMedical, faUser } from '@fortawesome/free-solid-svg-icons';
 const Menu = ({menuId, children}) => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const handleLogout = () => {
+        navigate('/login');
+        window.location.reload();
+    }
     return (
         <>
          <div className="menu-container">
@@ -18,12 +22,12 @@ const Menu = ({menuId, children}) => {
                     <li className={` ${menuId === 4 ? 'active' : ''}`} onClick={() => {navigate("/water")}}>Chỉ Số Nước</li>
                     <li className={` ${menuId === 5 ? 'active' : ''}`} onClick={() => {navigate("/tenants")}}>DS Khách Thuê</li>
                     <li className={` ${menuId === 6 ? 'active' : ''}`} onClick={() => {navigate("/service")}}>Dịch Vụ</li>
-                    <li className={` ${menuId === 7 ? 'active' : ''}`} onClick={() => {navigate("/involde-details")}}>Chi Tiết Hóa Đơn</li>
+                    <li className={` ${menuId === 7 ? 'active' : ''}`} onClick={() => {navigate("/invoice")}}>Chi Tiết Hóa Đơn</li>
                     <div className='btnChangePasswd'>
-                        <button className='ChangePasswd'>Đổi Mật Khẩu</button>
+                        <button className={`ChangePasswd ${menuId === 8 ? 'active' : ' '}`} onClick={() => {navigate("/changepasswd")}}>Đổi Mật Khẩu</button>
                     </div>
                     <div className='btnLogout'>
-                        <button className='Logout'>Đăng Xuất</button>
+                        <button className='Logout' onClick={handleLogout}>Đăng Xuất</button>
                     </div>
                 </ul>
             </div>

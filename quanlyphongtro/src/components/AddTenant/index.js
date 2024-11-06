@@ -67,9 +67,9 @@ function AddTenant() {
             {/* Hiển thị thông báo lỗi ở đầu */}
             {message && <p className="error-message">{message}</p>}
             <div className='body-form'>
-                <button className='AddInformation' onClick={() => handleMenuClick('thongTin')}>Thông Tin</button>
-                <button className='AddService' onClick={() => handleMenuClick('dichVu')}>Dịch Vụ</button>
-                <button className='AddTenants' onClick={() => handleMenuClick('thanhvien')}>Thành Viên</button>
+                <button className={`AddInformation ${activeMenu === 'thongTin'  ? 'active' : ''}`} onClick={() => handleMenuClick('thongTin')}>Thông Tin</button>
+                <button className={`AddService ${activeMenu === 'dichVu' ? 'active' : ''}`} onClick={() => handleMenuClick('dichVu')}>Dịch Vụ</button>
+                <button className={`AddTenants ${activeMenu === 'thanhvien' ? 'active' : ''}`} onClick={() => handleMenuClick('thanhvien')}>Thành Viên</button>
             </div>
             {activeMenu === 'thongTin' && <ThongTin onDataChange={handleDataChange} />}
             {activeMenu === 'dichVu' && <DichVu />}

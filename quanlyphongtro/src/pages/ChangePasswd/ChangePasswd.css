@@ -1,0 +1,61 @@
+.container-changepasswd {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 30px;
+}
+
+.container-changepasswd h2 {
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.row1-change, .row2-change, .row3-change {
+    width: 100%; /* Đảm bảo các hàng chiếm 100% chiều rộng của container */
+    display: flex;
+}
+
+.container-changepasswd input {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 30%; 
+    box-sizing: border-box;
+}
+.row1-change input{
+    margin-left: 65px;
+}
+.row2-change input{
+    margin-left: 87px;
+}
+.row3-change input{
+    margin-left: 14px;
+}
+.container-changepasswd button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #c0c0c0; /* Màu nền xám */
+    color: #333; /* Màu chữ đậm */
+    border: 1px solid #555; /* Viền đậm */
+    border-radius: 20px; /* Tạo góc bo tròn */
+    cursor: pointer;
+    width: 100px; /* Độ rộng của nút */
+    height: 40px; /* Chiều cao của nút */
+    gap: 5px;
+    margin-left: 12px;
+}
+
+.container-changepasswd button:hover {
+    background-color: #b0b0b0; /* Màu nền khi hover */
+}
+
+/* Thêm biểu tượng dấu kiểm */
+.container-changepasswd button::before {
+    content: "✔"; /* Biểu tượng dấu kiểm */
+    font-size: 16px;
+    color: #333; /* Màu của biểu tượng */
+}

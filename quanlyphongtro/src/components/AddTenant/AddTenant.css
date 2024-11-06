@@ -80,3 +80,8 @@
 .body-form button:hover {
     background-color: #ddd;
 }
+.body-form button.active{
+    background-color: #4CAF50; /* Màu nền khi được chọn */
+    color: #fff;              /* Màu chữ khi được chọn */
+    border-color: #388E3C;
+}

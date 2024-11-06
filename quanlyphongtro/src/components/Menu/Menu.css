@@ -141,3 +141,6 @@ html, body {
 .side-menu ul li.active {
     background-color:aqua !important;
 }
+.btnChangePasswd button.active{
+    background-color: aquamarine;
+}

@@ -1,0 +1,163 @@
+\/* Container for the invoice section */
+.container-invoice {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Header styling */
+.header-invoice {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Title styling */
+.invoice-h2 {
+    font-size: 24px;
+    margin: 0;
+}
+
+/* Button styling */
+.btn-invoice .button {
+    margin-right: 10px;
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-invoice .button:hover {
+    background-color: #0056b3;
+}
+
+/* Body of invoice */
+.body-invoice {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Rows in the body */
+.row1-invoice,
+.row2-invoice {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+/* Input fields styling */
+.invoice-thang,
+.invoice-nam,
+.invoice-tang,
+.invoice-phong {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.invoice-thang h2,
+.invoice-nam h2,
+.invoice-tang h2,
+.invoice-phong h2 {
+    margin-right: 10px;
+    font-size: 18px;
+    white-space: nowrap;
+}
+
+.invoice-thang input,
+.invoice-nam input,
+.invoice-tang input,
+.invoice-phong input {
+    flex: 1;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Button row styling */
+.btn-row1 {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+/* Search and add button styling */
+.invoice-search,
+.invoice-add {
+    padding: 8px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.invoice-search:hover,
+.invoice-add:hover {
+    background-color: #218838;
+}
+
+/* Table styling */
+.table-invoice {
+    margin-top: 20px;
+}
+
+.table-invoice table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-invoice th,
+.table-invoice td {
+    padding: 10px;
+    text-align: left;
+}
+
+.table-invoice th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+
+/* Quayve class styling */
+.quayve {
+    margin-left: auto; /* Dùng auto để căn giữa trong flex */
+}
+
+ .row-employee.active {
+    background-color:aqua;
+}
+
+.row-employee:hover {
+    background-color: #ccc;
+}
+
+.table-invoice {
+    width: 100%;
+    border-collapse: collapse; /* Để các viền không bị chồng lên nhau */
+}
+
+.table-invoice th,
+.table-invoice td {
+    border: 1px solid #ccc; /* Viền màu xám cho ô */
+    padding: 10px; /* Khoảng cách trong ô */
+    text-align: left; /* Căn trái nội dung */
+}
+.table-invoice th {
+    text-align: center;
+    vertical-align: middle;
+}
+.table-invoice td {
+    text-align: center;
+    vertical-align: middle;
+}

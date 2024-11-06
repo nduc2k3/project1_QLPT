@@ -11,6 +11,8 @@ import AddTenant from './components/AddTenant/index';
 import Service from './pages/Service/index';
 import ThemDichVu from './components/ThemDichVu/index';
 import './App.css';
+import Invoice from './pages/Invoice/index';
+import ChangePasswd from './pages/ChangePasswd/index';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // State để kiểm tra người dùng đã đăng nhập hay chưa
@@ -38,6 +40,8 @@ function App() {
           <Route path="/water" element={<Menu menuId={4}><Water/></Menu>}/>
           <Route path="/tenants" element={<Menu menuId={5}><Tenants/></Menu>}/>
           <Route path='/service' element={<Menu menuId={6}><Service/></Menu>}/>
+          <Route path='/invoice' element={<Menu menuId={7}><Invoice/></Menu>}/>
+          <Route path='/changepasswd' element={<Menu menuId={8}><ChangePasswd/></Menu>}/>
           <Route path='/addservice' element={<Menu><ThemDichVu/></Menu>}/>
           <Route path="/addtenant" element={<AddTenant/>}/>
         </>
