@@ -75,7 +75,6 @@
 .invoice-nam input,
 .invoice-tang input,
 .invoice-phong input {
-    flex: 1;
     padding: 8px;
     font-size: 16px;
     border: 1px solid #ccc;
@@ -137,7 +136,12 @@
  .row-employee.active {
     background-color:aqua;
 }
-
+.invoice-tang input{
+    margin-left: 10px;
+}
+.invoice-phong{
+    margin-left: -145px;
+}
 .row-employee:hover {
     background-color: #ccc;
 }

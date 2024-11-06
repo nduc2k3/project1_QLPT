@@ -35,7 +35,7 @@ function ThongTinDichVu() {
                                 <tr key={index}>
                                     <td>{service.tenphong}</td>
                                     <td>{service.tendv}</td>
-                                    <td>{service.giatien}</td>
+                                    <td>{parseInt(service.giatien).toLocaleString('vi-VN')}</td>
                                     <td>{service.soluong}</td>
                                 </tr>
                             ))

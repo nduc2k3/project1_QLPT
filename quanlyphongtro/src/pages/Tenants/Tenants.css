@@ -75,13 +75,17 @@
 .tenants-nam input,
 .tenants-tang input,
 .tenants-phong input {
-    flex: 1;
     padding: 8px;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
-
+.tenants-tang input{
+    margin-left: 10px;
+}
+.tenants-phong{
+    margin-left: -249px;
+}
 /* Button row styling */
 .btn-row1 {
     display: flex;
