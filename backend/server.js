@@ -32,6 +32,10 @@ app.use('/api/dichvu/',DvRouter)
 const STRouter = require('./routers/service_tenant')
 app.use('/api/dv_kt/',STRouter)
 
+//quan li dich vu thanh vien
+const TvRouter = require('./routers/thanhvien')
+app.use('/api/thanhvien/',TvRouter)
+
 const TestRouter = require('./routers/thongtinkhachthue')
 app.use('/api/ttkt/',TestRouter)
 

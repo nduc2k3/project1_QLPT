@@ -144,6 +144,7 @@ router.get('/tongtien', async (req, res) => {
             },
             {
                 $project: {
+                    makt : 1,
                     tenkt: "$tenant_info.tenkt",
                     thang: "$thang", // Thêm trường tháng
                     nam: "$nam", // Thêm trường năm
@@ -165,7 +166,7 @@ router.get('/tongtien', async (req, res) => {
         for (let i = 0; i < dienNuocResults.length; i++) {
             let totalCost = dienNuocResults[i].tongtien_dn;
 
-            const services = await STModel.find({ makt: dvResults[i].makt });
+            const services = await STModel.find({ makt: dienNuocResults[i].makt });
 
             for (const service of services) {
                 const dv = await DvModel.findOne({ madv: service.madv });
@@ -173,6 +174,7 @@ router.get('/tongtien', async (req, res) => {
             }
 
             result.push({
+                makt : dienNuocResults[i].makt,
                 tenkt: dienNuocResults[i].tenkt,
                 thang: dienNuocResults[i].thang,
                 nam: dienNuocResults[i].nam,
@@ -211,6 +213,7 @@ router.get('/tongtien1', async (req, res) => {
             },
             {
                 $project: {
+                    makt: 1,
                     tenkt: "$tenant_info.tenkt",
                     ngaysinh : "$tenant_info.ngaysinh",
                     cccd : "$tenant_info.cccd",
@@ -219,7 +222,9 @@ router.get('/tongtien1', async (req, res) => {
                     nam: "$nam", // Thêm trường năm
                     tenphong : {$arrayElemAt: ["$room_info.tenphong", 0] },
                     tang: { $arrayElemAt: ["$room_info.tang", 0] }, 
-                    ngaythue : "$tenant_info.ngaythue",
+                    tienphong : "$tenant_info.tienphong",
+                    tiendien:{$multiply: ["$sodien", "$giadien"]},
+                    tiennuoc:{$multiply: ["$sonuoc", "$gianuoc"]},
                     tongtien_dn: {
                         $add: [
                             "$tenant_info.tienphong",
@@ -231,30 +236,33 @@ router.get('/tongtien1', async (req, res) => {
             }
         ]);
 
-        const dvResults = await TenantModel.find();
+        const dvResults = await TenantModel.find({});
 
         const result = [];
 
         for (let i = 0; i < dienNuocResults.length; i++) {
+            let tiendv = 0;
             let totalCost = dienNuocResults[i].tongtien_dn;
 
-            const services = await STModel.find({ makt: dvResults[i].makt });
+            const services = await STModel.find({ makt: dienNuocResults[i].makt });
 
             for (const service of services) {
                 const dv = await DvModel.findOne({ madv: service.madv });
+                tiendv += service.soluong * dv.giatien;
                 totalCost += service.soluong * dv.giatien;
             }
 
             result.push({
+                makt : dienNuocResults[i].makt,
                 tenkt: dienNuocResults[i].tenkt,
-                ngaysinh: dienNuocResults[i].ngaysinh,
-                cccd: dienNuocResults[i].cccd,
-                sdt: dienNuocResults[i].sdt,
                 thang: dienNuocResults[i].thang,
                 nam: dienNuocResults[i].nam,
                 tenphong : dienNuocResults[i].tenphong,
                 tang: dienNuocResults[i].tang,
-                ngaythue: dienNuocResults[i].ngaythue,
+                tiendien : dienNuocResults[i].tiendien,
+                tiennuoc : dienNuocResults[i].tiennuoc,
+                tienphonng : dienNuocResults[i].tienphong,
+                tiendv : tiendv,
                 tongtien: totalCost
             });
         }
