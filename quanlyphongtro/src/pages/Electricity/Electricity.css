@@ -14,3 +14,11 @@
     flex-direction: row;
     padding-bottom: 20px;
 }
+.table-electricity th{
+    text-align: center;
+    vertical-align: middle;
+}
+.table-electricity td{
+    text-align: center;
+    vertical-align: middle;
+}

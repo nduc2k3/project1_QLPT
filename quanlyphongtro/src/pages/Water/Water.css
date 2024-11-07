@@ -14,3 +14,11 @@
     flex-direction: row;
     padding-bottom: 20px;
 }
+.table-water th{
+    text-align: center;
+    vertical-align: middle;
+}
+.table-water td{
+    text-align: center;
+    vertical-align: middle;
+}

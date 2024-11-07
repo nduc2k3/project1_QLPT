@@ -66,14 +66,16 @@ function Tenants() {
     };
 
     const handleDeleteClick = async () => {
-        if (selectedMakt) {
-            try {
+        if(!selectedMakt){
+            alert("Vui lòng chọn để xóa!");
+            return;
+        }
+        try {
                 await axios.delete(`http://localhost:8080/api/tenant/${selectedMakt}`);
                 fetchTenants();
                 setSelectedMakt(null);
             } catch (error) {
                 console.error("Lỗi khi xóa khách thuê:", error);
-            }
         }
     };
 
