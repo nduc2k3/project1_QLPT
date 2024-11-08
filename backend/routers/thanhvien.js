@@ -42,10 +42,10 @@ router.post('/', (req, res, next) => {
         })
 })
 
-router.delete('/:makt',(req,res,next)=>{
-    var makt = req.params.makt
+router.delete('/:cccd',(req,res,next)=>{
+    var cccd = req.params.cccd
     TvModel.deleteOne({
-        makt : makt
+        cccd : cccd
     })
     .then(data=>{
         res.json('Xoa thanh cong')
@@ -57,10 +57,10 @@ router.delete('/:makt',(req,res,next)=>{
 
 
 
-router.put('/:makt', (req, res, next) => {
-    const makt = req.params.makt;
+router.put('/:cccd', (req, res, next) => {
+    const cccd = req.params.cccd;
 
-    TvModel.findOneAndUpdate({ makt : makt }, req.body, { new: true })
+    TvModel.findOneAndUpdate({ cccd : cccd }, req.body, { new: true })
         .then(data => {
             if (!data) {
                 return res.status(404).json('Không tìm thấy thanh vien để cập nhật');
