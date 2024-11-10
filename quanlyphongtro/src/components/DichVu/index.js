@@ -73,11 +73,12 @@ function DichVu() {
     <div className="container-dichvu">
       <div className="table-container">
         <div className="makt-dichvu">
-          <label>Mã Khách Thuê</label>
+          <label style={{marginBottom:'12px'}}>Mã Khách Thuê</label>
           <input
             className="makt-dichvu"
             value={makt}
             onChange={(e) => setMakt(e.target.value)}
+            style={{marginBottom:'12px', marginLeft:'12px'}}
           />
         </div>
         <Table striped bordered hover>

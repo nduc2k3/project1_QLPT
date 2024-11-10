@@ -60,6 +60,10 @@ const Login = ({ onLoginSuccess }) => {
         }
 
         if (apiEmails.includes(email) && apiPasswords.includes(password)) {
+            // Lưu thông tin email và password vào localStorage
+            localStorage.setItem('email', email);
+            localStorage.setItem('password', password);
+
             alert('Đăng nhập thành công!');
             onLoginSuccess();
             navigate("/home");

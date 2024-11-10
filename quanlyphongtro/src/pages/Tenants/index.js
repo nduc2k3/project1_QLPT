@@ -167,10 +167,7 @@ function Tenants() {
                                 <th>Thuê phòng</th>
                                 <th>Tầng</th>
                                 <th>Ngày thuê</th>
-                                <th>Ngày hết hạn HĐ</th>
                                 <th>Tiền thuê</th>
-                                <th>Đã đóng (VND)</th>
-                                <th>Còn lại (VND)</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -188,10 +185,7 @@ function Tenants() {
                                     <td>{tenant.tenphong}</td>
                                     <td>{tenant.tang}</td>
                                     <td>{formatDate(tenant.ngaythue)}</td>
-                                    <td>{formatDate(tenant.ngayhethanhd)}</td>
                                     <td>{parseInt(tenant.tienphong).toLocaleString('vi-VN')}</td>
-                                    <td>{parseInt(tenant.dadong).toLocaleString('vi-VN')}</td>
-                                    <td>{parseInt(tenant.conlai).toLocaleString('vi-VN')}</td>
                                 </tr>
                             ))}
                         </tbody>

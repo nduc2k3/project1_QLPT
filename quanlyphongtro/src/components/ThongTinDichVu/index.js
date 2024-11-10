@@ -9,7 +9,6 @@ function ThongTinDichVu() {
             const respone = await axios.get('http://localhost:8080/api/ttkt/listdv');
             const data = respone.data;
             setService(data);
-            console.log(data);
         } catch(error){
             console.error("Có lỗi khi lấy dữ liệu:", error);
         }

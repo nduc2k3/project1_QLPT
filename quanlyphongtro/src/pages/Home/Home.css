@@ -38,16 +38,34 @@ body, html {
     border-radius: 10px;
     padding: 10px;
 }
-.Ngay , .Thang{
-    border-radius: 12px;
-    flex: 1;
-    margin-right: 10px;
-    width: 90px;
-}
-.input{
-    margin-bottom: 10px;
-}
-.trangthai h2, .doanhthu h2, .danhsachphong h2, .danhsachkhach h2, .gopy h2 {
+.trangthai-home h2, .doanhthu h2, .danhsachphong h2, .danhsachkhach h2, .gopy h2 {
     text-align: center; /* Căn giữa theo chiều ngang */
     margin: 0;
 }
+.input {
+    display: flex;
+    align-items: center; /* Căn giữa các phần tử theo chiều dọc */
+    justify-content: center; /* Căn giữa các phần tử theo chiều ngang */
+    gap: 8px; /* Khoảng cách giữa các phần tử */
+    padding: 8px;
+    background-color: #f0f8ff; /* Màu nền nhẹ cho phần input */
+    border-radius: 12px; /* Bo góc cho phần chứa */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Hiệu ứng bóng nhẹ */
+    margin-bottom: 12px;
+}
+
+.Ngay, .Thang {
+    font-size: 14px; /* Kích thước chữ phù hợp */
+    color: #333; /* Màu chữ */
+    padding: 4px 8px; /* Khoảng cách bên trong các ô Ngày, Tháng */
+    background-color: #e6f7ff; /* Màu nền nhẹ cho các ô */
+    border-radius: 8px; /* Bo góc ô */
+    text-align: center; /* Căn giữa văn bản */
+    min-width: 60px; /* Chiều rộng tối thiểu để giữ bố cục */
+}
+
+.input p {
+    margin: 0; /* Loại bỏ khoảng cách mặc định */
+    color: red;
+}
+

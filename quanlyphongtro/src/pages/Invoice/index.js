@@ -1,9 +1,50 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileExcel, faPrint, faTrash, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import './Invoice.css';
+import axios from "axios";
+
 function Invoice() {
-    return (  
+    const [month, setMonth] = useState('');
+    const [year, setYear] = useState('');
+    const [floor, setFloor] = useState('');
+    const [room, setRoom] = useState('');
+    const [data, setData] = useState(false); // true = không có dữ liệu
+    const [invoice, setInvoice] = useState([]);
+    const [searchClickCount, setSearchClickCount] = useState(0);
+
+    const fetchInvoices = useCallback(async () => {
+        try {
+            const params = {};
+            if (month) params.thang = month;
+            if (year) params.nam = year;
+            if (room) params.tenphong = room;
+            if (floor) params.tang = floor;
+            const response = await axios.get('http://localhost:8080/api/ttkt/tongtien', { params });
+            const data = response.data;
+            setData(data.length === 0); // Nếu không có dữ liệu thì setData là true
+            setInvoice(data);
+        } catch (error) {
+            console.error("Error", error);
+        }
+    }, [month, year, room, floor]);
+
+    useEffect(() => {
+        fetchInvoices();
+    }, [fetchInvoices]);
+
+    const handleSearchClick = () => {
+        setSearchClickCount(prev => prev + 1);
+        fetchInvoices();
+        if (searchClickCount >= 1) {
+            setMonth('');
+            setYear('');
+            setRoom('');
+            setFloor('');
+        }
+    };
+
+    return (
         <div className="container-invoice">
             <div className='header-invoice'>
                 <h2 className='invoice-h2'>Danh sách khách thuê</h2>
@@ -26,6 +67,8 @@ function Invoice() {
                         <input
                             className='thang-invoice'
                             type="text"
+                            value={month}
+                            onChange={(e) => setMonth(e.target.value)}
                         />
                     </div>
                     <div className='invoice-nam'>
@@ -33,10 +76,12 @@ function Invoice() {
                         <input
                             className='nam-invoice'
                             type="text"
+                            value={year}
+                            onChange={(e) => setYear(e.target.value)}
                         />
                     </div>
                     <div className='btn-row1'>
-                        <button className='invoice-search'>
+                        <button className='invoice-search' onClick={handleSearchClick}>
                             <FontAwesomeIcon icon={faMagnifyingGlass} /> Xem
                         </button>
                     </div>
@@ -48,6 +93,8 @@ function Invoice() {
                         <input
                             className='tang-invoice'
                             type="text"
+                            value={floor}
+                            onChange={(e) => setFloor(e.target.value)}
                         />
                     </div>
                     <div className='invoice-phong'>
@@ -55,6 +102,8 @@ function Invoice() {
                         <input
                             className='phong-invoice'
                             type="text"
+                            value={room}
+                            onChange={(e) => setRoom(e.target.value)}
                         />
                     </div>
                 </div>
@@ -70,13 +119,32 @@ function Invoice() {
                             <th>Tiền điện</th>
                             <th>Tiền nước</th>
                             <th>Dịch vụ khác</th>
-                            <th>Nợ tháng trước</th>
-                            <th>Tông tiền(VND)</th>
+                            <th>Thời gian</th>
+                            <th>Tổng tiền(VND)</th>
                         </tr>
                     </thead>
                     <tbody>
+                        {data ? (
+                            <tr>
+                                <td colSpan="9" style={{ textAlign: 'center' }}>Không có dữ liệu</td>
+                            </tr>
+                        ) : (
+                            invoice.map((item, index) => (
+                                <tr key={index}>
+                                    <td>{item.tenphong}</td>
+                                    <td>{item.tang}</td>
+                                    <td>{item.tenkt}</td>
+                                    <td>{item.tienphong}</td>
+                                    <td>{item.tiendien}</td>
+                                    <td>{item.tiennuoc}</td>
+                                    <td>{item.tiendv}</td>
+                                    <td>{item.thang}/{item.nam}</td>
+                                    <td>{item.tongtien}</td>
+                                </tr>
+                            ))
+                        )}
                     </tbody>
-                </table>    
+                </table>
             </div>
         </div>
     );
