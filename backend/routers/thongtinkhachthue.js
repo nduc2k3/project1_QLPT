@@ -71,7 +71,7 @@ router.get('/tiendv', async (req, res) => {
     }
 });
 
-router.get('/tongtien/:thang/:nam', async (req, res) => {
+router.get('/tongtien1/:thang/:nam', async (req, res) => {
     const thang = parseInt(req.params.thang);
     const nam = parseInt(req.params.nam);
 
@@ -128,7 +128,7 @@ router.get('/tongtien/:thang/:nam', async (req, res) => {
     }
 });
 
-router.get('/tongtien', async (req, res) => {
+router.get('/tongtien1', async (req, res) => {
     try {
         const dienNuocResults = await DiennuocModel.aggregate([
             {
@@ -189,8 +189,33 @@ router.get('/tongtien', async (req, res) => {
 });
 
 
-router.get('/tongtien1', async (req, res) => {
+router.get('/tongtien', async (req, res) => {
     try {
+        const { tenphong, tang, thang, nam } = req.query;
+
+        let query = {};
+
+        if (tenphong) {
+            query["tenphong"] = tenphong;
+        }
+        if (tang) {
+            query["tang"] = parseInt(tang);
+        }
+
+        if (thang) {
+            query["thang"] = parseInt(thang); // Chuyển tháng sang kiểu số
+        }
+
+        if (nam) {
+            query["nam"] = parseInt(nam); // Chuyển tháng sang kiểu số
+        }
+
+        if (thang & nam) {
+            query["thang"] = parseInt(thang);
+            query["nam"] = parseInt(nam);
+        }
+
+
         const dienNuocResults = await DiennuocModel.aggregate([
             {
                 $lookup: {
@@ -233,6 +258,9 @@ router.get('/tongtien1', async (req, res) => {
                         ]
                     }
                 }
+            },
+            {
+                $match: query
             }
         ]);
 
@@ -261,7 +289,7 @@ router.get('/tongtien1', async (req, res) => {
                 tang: dienNuocResults[i].tang,
                 tiendien : dienNuocResults[i].tiendien,
                 tiennuoc : dienNuocResults[i].tiennuoc,
-                tienphonng : dienNuocResults[i].tienphong,
+                tienphong : dienNuocResults[i].tienphong,
                 tiendv : tiendv,
                 tongtien: totalCost
             });
@@ -307,6 +335,7 @@ router.get('/danhsach', async (req, res) => {
             },
             {
                 $project: {
+                    makt: 1,
                     tenkt: 1,
                     ngaysinh: 1,
                     cccd: 1,
