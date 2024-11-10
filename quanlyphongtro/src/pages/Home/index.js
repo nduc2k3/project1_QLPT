@@ -87,7 +87,7 @@ function Home() {
         plugins: {
             title: {
                 display: true,
-                text: 'Doanh Thu',
+                text: '',
             },
             legend: {
                 position: 'top',
