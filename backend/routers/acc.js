@@ -30,20 +30,27 @@ router.post('/',(req,res,next)=>{
     })
 })
 
-router.put('/:email',(req,res,next)=>{
-    var email = req.params.email
-    var newpass = req.body.newPass
+router.put('/', async (req, res, next) => {
+    try {
+        const email = req.body.email;
+        const newPass = req.body.newPass;
 
-    AccModel.findByIdAndUpdate(email,{
-        password : newpass
-    })
-    .then(data=>{
-        res.json('update thanh cong')
-    })
-    .catch(err=>{
-        res.status(500).json('loi sever')
-    })
-})
+        // Tìm tài khoản dựa trên email
+        const account = await AccModel.findOne({ email: email });
+
+        if (!account) {
+            return res.status(404).json('Tài khoản không tồn tại');
+        }
+
+        // Cập nhật mật khẩu
+        account.password = newPass;
+        await account.save();
+
+        res.json('Cập nhật mật khẩu thành công');
+    } catch (err) {
+        res.status(500).json('Lỗi server');
+    }
+});
 
 router.delete('/:email',(req,res,next)=>{
     var email = req.params.email
