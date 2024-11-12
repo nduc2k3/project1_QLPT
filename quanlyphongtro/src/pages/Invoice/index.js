@@ -11,7 +11,7 @@ function Invoice() {
     const [room, setRoom] = useState('');
     const [data, setData] = useState(false); // true = không có dữ liệu
     const [invoice, setInvoice] = useState([]);
-    const [searchClickCount, setSearchClickCount] = useState(0);
+    const [searchClicked, setSearchClicked] = useState(false);
 
     const fetchInvoices = useCallback(async () => {
         try {
@@ -34,20 +34,23 @@ function Invoice() {
     }, [fetchInvoices]);
 
     const handleSearchClick = () => {
-        setSearchClickCount(prev => prev + 1);
-        fetchInvoices();
-        if (searchClickCount >= 1) {
+        if (searchClicked) {
+            // Reset tất cả các giá trị khi nhấn lần thứ hai
             setMonth('');
             setYear('');
             setRoom('');
             setFloor('');
+            setSearchClicked(false); // Đặt lại trạng thái nút
+        } else {
+            setSearchClicked(true); // Đánh dấu là đã tìm kiếm
         }
+        fetchInvoices(); // Gọi hàm fetchInvoices để lấy dữ liệu với các điều kiện hiện tại
     };
 
     return (
         <div className="container-invoice">
             <div className='header-invoice'>
-                <h2 className='invoice-h2'>Danh sách khách thuê</h2>
+                <h2 className='invoice-h2'>Chi Tiết Hóa Đơn</h2>
                 <div className='btn-invoice'>
                     <button className="button">
                         <FontAwesomeIcon icon={faFileExcel} /> Xuất file excel
