@@ -10,10 +10,21 @@ const CounterSchema = new Schema({
 const Counter = mongoose.model('Counter', CounterSchema);
 
 const STSchema = new Schema({
-    mast: String,
-    makt: String,
-    madv: String,
-    soluong: Number
+    mast: { 
+        type: String,
+        unique: true
+    },
+    makt: { 
+        type: String, 
+        required: true 
+    },
+    madv: { 
+        type: String, 
+        required: true 
+    },
+    soluong: { 
+        type: Number, 
+        required: true }
 }, {
     collection: "service_tenant"
 });

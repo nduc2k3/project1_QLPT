@@ -67,7 +67,7 @@ router.delete('/:email',(req,res,next)=>{
 
 router.get('/:email',(req,res,next)=>{
     var email = req.params.email
-    AccModel.findById(email)
+    AccModel.find({email: email})
     .then(data=>{
         res.json(data)
 

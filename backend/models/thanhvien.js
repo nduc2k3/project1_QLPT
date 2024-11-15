@@ -3,16 +3,32 @@ const Schema = mongoose.Schema;
 mongoose.connect('mongodb://localhost/DB0001');
 
 const TvSchema = new Schema({
-    makt: String,
-    tentv : String,
-    ngaysinh : Date,
-    gioitinh : String,
-    cccd : String,
-    diachi: String,
-    sdt: String
-    
-},{
-    collection : "thanhvien"
+    makt: { 
+        type: String,
+         required: true,
+          
+    },
+    tentv: { 
+        type: String, 
+        required: true 
+    },
+    ngaysinh: { 
+        type: Date 
+    },
+    gioitinh: { 
+        type: String 
+    },
+    cccd: { 
+        type: String 
+    },
+    diachi: { 
+        type: String 
+    },
+    sdt: { 
+        type: String 
+    }
+}, {
+    collection: "thanhvien"
 });
 
 const TvModel = mongoose.model('thanhvien',TvSchema);

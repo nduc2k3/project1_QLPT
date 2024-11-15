@@ -5,188 +5,188 @@ const DiennuocModel = require('../models/diennuoc');
 const STModel = require('../models/service_tenant');
 const DvModel = require('../models/dichvu')
 
-router.get('/:thang/:nam', async (req, res) => {
-    const thang = parseInt(req.params.thang);
-    const nam = parseInt(req.params.nam);
+// router.get('/:thang/:nam', async (req, res) => {
+//     const thang = parseInt(req.params.thang);
+//     const nam = parseInt(req.params.nam);
 
-    try {
-        const results = await DiennuocModel.aggregate([
-            {
-                $match: { thang: thang, nam: nam }
-            },
-            {
-                $lookup: {
-                    from: "tenant",
-                    localField: "makt",
-                    foreignField: "makt",
-                    as: "tenant_info"
-                }
-            },
-            {
-                $unwind: "$tenant_info"
-            },
-            {
-                $project: {
-                    tenkt: "$tenant_info.tenkt",
-                    tongtien: {
-                        $add: [
-                            "$tenant_info.tienphong",
-                            { $multiply: ["$sodien", "$giadien"] },
-                            { $multiply: ["$sonuoc", "$gianuoc"] }
-                        ]
-                    }
-                }
-            }
-        ]);
+//     try {
+//         const results = await DiennuocModel.aggregate([
+//             {
+//                 $match: { thang: thang, nam: nam }
+//             },
+//             {
+//                 $lookup: {
+//                     from: "tenant",
+//                     localField: "makt",
+//                     foreignField: "makt",
+//                     as: "tenant_info"
+//                 }
+//             },
+//             {
+//                 $unwind: "$tenant_info"
+//             },
+//             {
+//                 $project: {
+//                     tenkt: "$tenant_info.tenkt",
+//                     tongtien: {
+//                         $add: [
+//                             "$tenant_info.tienphong",
+//                             { $multiply: ["$sodien", "$giadien"] },
+//                             { $multiply: ["$sonuoc", "$gianuoc"] }
+//                         ]
+//                     }
+//                 }
+//             }
+//         ]);
 
-        res.json(results);
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('Internal Server Error');
-    }
-});
+//         res.json(results);
+//     } catch (err) {
+//         console.error(err);
+//         res.status(500).send('Internal Server Error');
+//     }
+// });
 
 
-router.get('/tiendv', async (req, res) => {
-    try {
-        const tenants = await TenantModel.find();
+// router.get('/tiendv', async (req, res) => {
+//     try {
+//         const tenants = await TenantModel.find();
         
-        const result = [];
+//         const result = [];
 
-        for (const tenant of tenants) {
-            const services = await STModel.find({ makt: tenant.makt });
-            let totalCost = 0;
+//         for (const tenant of tenants) {
+//             const services = await STModel.find({ makt: tenant.makt });
+//             let totalCost = 0;
 
-            for (const service of services) {
-                const dv = await DvModel.findOne({ madv: service.madv });
-                totalCost += service.soluong * dv.giatien;
-            }
+//             for (const service of services) {
+//                 const dv = await DvModel.findOne({ madv: service.madv });
+//                 totalCost += service.soluong * dv.giatien;
+//             }
 
-            result.push({ tenkt: tenant.tenkt, tongtien: totalCost });
-        }
+//             result.push({ tenkt: tenant.tenkt, tongtien: totalCost });
+//         }
 
-        res.json(result);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
+//         res.json(result);
+//     } catch (error) {
+//         res.status(500).json({ error: error.message });
+//     }
+// });
 
-router.get('/tongtien1/:thang/:nam', async (req, res) => {
-    const thang = parseInt(req.params.thang);
-    const nam = parseInt(req.params.nam);
+// router.get('/tongtien1/:thang/:nam', async (req, res) => {
+//     const thang = parseInt(req.params.thang);
+//     const nam = parseInt(req.params.nam);
 
-    try {
-        const dienNuocResults = await DiennuocModel.aggregate([
-            {
-                $match: { thang: thang, nam: nam }
-            },
-            {
-                $lookup: {
-                    from: "tenant",
-                    localField: "makt",
-                    foreignField: "makt",
-                    as: "tenant_info"
-                }
-            },
-            {
-                $unwind: "$tenant_info"
-            },
-            {
-                $project: {
-                    tenkt: "$tenant_info.tenkt",
-                    tongtien_dn: {
-                        $add: [
-                            "$tenant_info.tienphong",
-                            { $multiply: ["$sodien", "$giadien"] },
-                            { $multiply: ["$sonuoc", "$gianuoc"] }
-                        ]
-                    }
-                }
-            }
-        ]);
+//     try {
+//         const dienNuocResults = await DiennuocModel.aggregate([
+//             {
+//                 $match: { thang: thang, nam: nam }
+//             },
+//             {
+//                 $lookup: {
+//                     from: "tenant",
+//                     localField: "makt",
+//                     foreignField: "makt",
+//                     as: "tenant_info"
+//                 }
+//             },
+//             {
+//                 $unwind: "$tenant_info"
+//             },
+//             {
+//                 $project: {
+//                     tenkt: "$tenant_info.tenkt",
+//                     tongtien_dn: {
+//                         $add: [
+//                             "$tenant_info.tienphong",
+//                             { $multiply: ["$sodien", "$giadien"] },
+//                             { $multiply: ["$sonuoc", "$gianuoc"] }
+//                         ]
+//                     }
+//                 }
+//             }
+//         ]);
 
-        const dvResults = await TenantModel.find();
+//         const dvResults = await TenantModel.find();
 
-        const result = [];
+//         const result = [];
 
-        for (let i = 0; i < dienNuocResults.length; i++) {
-            let totalCost = dienNuocResults[i].tongtien_dn;
+//         for (let i = 0; i < dienNuocResults.length; i++) {
+//             let totalCost = dienNuocResults[i].tongtien_dn;
 
-            const services = await STModel.find({ makt: dvResults[i].makt });
+//             const services = await STModel.find({ makt: dvResults[i].makt });
 
-            for (const service of services) {
-                const dv = await DvModel.findOne({ madv: service.madv });
-                totalCost += service.soluong * dv.giatien;
-            }
+//             for (const service of services) {
+//                 const dv = await DvModel.findOne({ madv: service.madv });
+//                 totalCost += service.soluong * dv.giatien;
+//             }
 
-            result.push({ tenkt: dienNuocResults[i].tenkt, tongtien: totalCost });
-        }
+//             result.push({ tenkt: dienNuocResults[i].tenkt, tongtien: totalCost });
+//         }
 
-        res.json(result);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
+//         res.json(result);
+//     } catch (error) {
+//         res.status(500).json({ error: error.message });
+//     }
+// });
 
-router.get('/tongtien1', async (req, res) => {
-    try {
-        const dienNuocResults = await DiennuocModel.aggregate([
-            {
-                $lookup: {
-                    from: "tenant",
-                    localField: "makt",
-                    foreignField: "makt",
-                    as: "tenant_info"
-                }
-            },
-            {
-                $unwind: "$tenant_info"
-            },
-            {
-                $project: {
-                    makt : 1,
-                    tenkt: "$tenant_info.tenkt",
-                    thang: "$thang", // Thêm trường tháng
-                    nam: "$nam", // Thêm trường năm
-                    tongtien_dn: {
-                        $add: [
-                            "$tenant_info.tienphong",
-                            { $multiply: ["$sodien", "$giadien"] },
-                            { $multiply: ["$sonuoc", "$gianuoc"] }
-                        ]
-                    }
-                }
-            }
-        ]);
+// router.get('/tongtien1', async (req, res) => {
+//     try {
+//         const dienNuocResults = await DiennuocModel.aggregate([
+//             {
+//                 $lookup: {
+//                     from: "tenant",
+//                     localField: "makt",
+//                     foreignField: "makt",
+//                     as: "tenant_info"
+//                 }
+//             },
+//             {
+//                 $unwind: "$tenant_info"
+//             },
+//             {
+//                 $project: {
+//                     makt : 1,
+//                     tenkt: "$tenant_info.tenkt",
+//                     thang: "$thang", // Thêm trường tháng
+//                     nam: "$nam", // Thêm trường năm
+//                     tongtien_dn: {
+//                         $add: [
+//                             "$tenant_info.tienphong",
+//                             { $multiply: ["$sodien", "$giadien"] },
+//                             { $multiply: ["$sonuoc", "$gianuoc"] }
+//                         ]
+//                     }
+//                 }
+//             }
+//         ]);
 
-        const dvResults = await TenantModel.find();
+//         const dvResults = await TenantModel.find();
 
-        const result = [];
+//         const result = [];
 
-        for (let i = 0; i < dienNuocResults.length; i++) {
-            let totalCost = dienNuocResults[i].tongtien_dn;
+//         for (let i = 0; i < dienNuocResults.length; i++) {
+//             let totalCost = dienNuocResults[i].tongtien_dn;
 
-            const services = await STModel.find({ makt: dienNuocResults[i].makt });
+//             const services = await STModel.find({ makt: dienNuocResults[i].makt });
 
-            for (const service of services) {
-                const dv = await DvModel.findOne({ madv: service.madv });
-                totalCost += service.soluong * dv.giatien;
-            }
+//             for (const service of services) {
+//                 const dv = await DvModel.findOne({ madv: service.madv });
+//                 totalCost += service.soluong * dv.giatien;
+//             }
 
-            result.push({
-                makt : dienNuocResults[i].makt,
-                tenkt: dienNuocResults[i].tenkt,
-                thang: dienNuocResults[i].thang,
-                nam: dienNuocResults[i].nam,
-                tongtien: totalCost
-            });
-        }
+//             result.push({
+//                 makt : dienNuocResults[i].makt,
+//                 tenkt: dienNuocResults[i].tenkt,
+//                 thang: dienNuocResults[i].thang,
+//                 nam: dienNuocResults[i].nam,
+//                 tongtien: totalCost
+//             });
+//         }
 
-        res.json(result);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
+//         res.json(result);
+//     } catch (error) {
+//         res.status(500).json({ error: error.message });
+//     }
+// });
 
 
 router.get('/tongtien', async (req, res) => {

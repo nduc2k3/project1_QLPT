@@ -3,17 +3,39 @@ const Schema = mongoose.Schema;
 mongoose.connect('mongodb://localhost/DB0001');
 
 const RoomSchema = new Schema({
-    maphong : String,
-    tenphong : String,
-    tang : Number,
-    trangthaiphong : Boolean,
-    trangthaitt: Boolean,
-    hinhanh : String,
-    giaphong :Number,
-    mota : String
-    
-},{
-    collection : "room"
+    maphong: { 
+        type: String,
+        required: true,
+        unique: true 
+    },
+    tenphong: { 
+        type: String, 
+        required: true 
+    },
+    tang: { 
+        type:Number, 
+        required: true 
+    },
+    trangthaiphong: { 
+        type: Boolean, 
+        default: false 
+    },
+    trangthaitt: { 
+        type: Boolean, 
+        default: false 
+    },
+    hinhanh: { 
+        type: String 
+    },
+    giaphong: { 
+        type: Number,
+        required: true 
+    },
+    mota: { 
+        type: String 
+    }
+}, {
+    collection: "room"
 });
 
 const RoomModel = mongoose.model('room',RoomSchema);
