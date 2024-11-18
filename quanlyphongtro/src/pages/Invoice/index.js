@@ -72,6 +72,10 @@ function Invoice() {
                             type="text"
                             value={month}
                             onChange={(e) => setMonth(e.target.value)}
+                            onInput={(e) =>{
+                                e.target.value = e.target.value.replace(/[^0-9]/g, '').slice(0, 2);
+                            }}
+                            maxLength={2}
                         />
                     </div>
                     <div className='invoice-nam'>
@@ -81,6 +85,10 @@ function Invoice() {
                             type="text"
                             value={year}
                             onChange={(e) => setYear(e.target.value)}
+                            onInput={(e) =>{
+                                e.target.value = e.target.value.replace(/[^0-9]/g, '').slice(0, 4);
+                            }}
+                            maxLength={4}
                         />
                     </div>
                     <div className='btn-row1'>

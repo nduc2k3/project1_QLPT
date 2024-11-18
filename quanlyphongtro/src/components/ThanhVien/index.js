@@ -99,9 +99,27 @@ function ThanhVien() {
                                     <option value="Nữ">Nữ</option>
                                 </select>
                             </td>
-                            <td><input value={row.cccd} onChange={(e) => handleInputChange(e, index, 'cccd')} /></td>
+                            <td>
+                                <input 
+                                    value={row.cccd} 
+                                    onChange={(e) => handleInputChange(e, index, 'cccd')} 
+                                    onInput={(e) =>{
+                                        e.target.value = e.target.value.replace(/[^0-9]/g, '').slice(0, 12);
+                                    }}
+                                    maxLength={12}
+                                />
+                            </td>
                             <td><input value={row.diachi} onChange={(e) => handleInputChange(e, index, 'diachi')} /></td>
-                            <td><input value={row.sdt} onChange={(e) => handleInputChange(e, index, 'sdt')} /></td>
+                            <td>
+                                <input 
+                                    value={row.sdt} 
+                                    onChange={(e) => handleInputChange(e, index, 'sdt')}
+                                    onInput={(e) =>{
+                                        e.target.value = e.target.value.replace(/[^0-9]/g, '').slice(0, 11);
+                                    }} 
+                                    maxLength={11}
+                                />
+                            </td>
                         </tr>
                     ))}
                 </tbody>

@@ -1,45 +1,74 @@
+/* Container của dropdown */
 .dropdown {
     position: relative;
     display: inline-block;
+    font-family: Arial, sans-serif;
 }
 
+/* Nút toggle */
 .dropdown-toggle {
-    padding: 10px;
+    padding: 12px 20px;
     cursor: pointer;
-    border: 1px solid #ccc;
-    background: white;
-    border-radius: 4px;
+    border: 1px solid #bbb;
+    background-color: #f7f7f7;
+    color: #555;
+    font-size: 14px;
+    border-radius: 6px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
+/* Hiệu ứng khi hover trên nút toggle */
+.dropdown-toggle:hover {
+    background-color: #e2e2e2;
+    border-color: #888;
+}
+
+/* Menu dropdown */
 .dropdown-menu {
     display: none;
     position: absolute;
-    background: white;
+    background-color: #ffffff;
     border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-top: 5px;
+    border-radius: 6px;
+    margin-top: 10px;
     list-style-type: none;
     padding: 0;
     z-index: 1;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    transform: translateY(-10px);
 }
 
+/* Hiển thị menu dropdown */
 .dropdown-menu.show {
     display: block;
+    opacity: 1;
+    transform: translateY(0);
 }
 
+/* Mỗi item trong menu */
 .dropdown-menu li {
-    padding: 10px;
+    padding: 8px 20px;
     cursor: pointer;
+    font-size: 14px;
+    color: #555;
+    transition: background-color 0.3s ease;
 }
 
+/* Hiệu ứng hover cho từng item */
 .dropdown-menu li:hover {
-    background: #f0f0f0;
+    background-color: #f0f0f0;
+    color: #333;
 }
 
+/* Mũi tên chỉ hướng (arrow) */
 .arrow {
-    margin-left: 5px;
+    margin-left: 8px;
+    transition: transform 0.3s ease;
 }
 
+/* Khi dropdown mở, xoay mũi tên */
 .arrow.open {
     transform: rotate(180deg);
 }
