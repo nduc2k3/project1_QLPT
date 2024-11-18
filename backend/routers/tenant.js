@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const TenantModel = require('../models/tenant')
+const RoomModel = require('../models/room')
 
 router.get('/',(req,res,next)=>{
     TenantModel.find({})
@@ -15,7 +16,7 @@ router.get('/',(req,res,next)=>{
 
 })
 
-router.post('/', (req, res, next) => {
+router.post('/',async (req, res, next) => {
     var makt = req.body.makt
     var tenkt = req.body.tenkt
     var sdt = req.body.sdt
@@ -31,7 +32,18 @@ router.post('/', (req, res, next) => {
     var ghichu = req.body.ghichu
     var anh = req.body.anh
     
-    
+    // Kiểm tra makt đã tồn tại chưa
+    const existingTenant = await TenantModel.findOne({ makt });
+    if (existingTenant) {
+        return res.status(400).json({ message: 'Mã khách thuê đã tồn tại' });
+    }
+
+    // Kiểm tra trạng thái phòng
+    const room = await RoomModel.findOne({ maphong });
+    if (!room || room.trangthaiphong) {
+        return res.status(400).json({ message: 'Phòng không khả dụng hoặc không tồn tại' });
+    }
+
 
     TenantModel.create({
         makt : makt,
@@ -54,22 +66,37 @@ router.post('/', (req, res, next) => {
             res.json('them khach thue thanh cong')
         })
         .catch(err => {
-            res.status(500).json('loi sever')
+          return  res.status(500).json('loi sever')
         })
+
+    await RoomModel.updateOne({ maphong }, { trangthaiphong: true });
 })
 
-router.delete('/:makt',(req,res,next)=>{
-    var makt = req.params.makt
-    TenantModel.deleteOne({
-        makt : makt
-    })
-    .then(data=>{
-        res.json('Xoa thanh cong')
-    })
-    .catch(err=>{
-        res.status(500).json('loi sever')
-    })
-})
+router.delete('/:makt', async (req, res, next) => {
+  const makt = req.params.makt;
+
+  try {
+      // Tìm khách thuê theo makt và xóa
+      const deleted1Tenant = await TenantModel.findOne({makt});
+      const deletedTenant = await TenantModel.deleteOne({ makt });
+
+      if (deletedTenant.deletedCount === 0) {
+          return res.status(404).json({ message: 'Không tìm thấy khách thuê để xóa' });
+      }
+
+      // Cập nhật trạng thái phòng sau khi xóa thành công khách thuê
+      await RoomModel.findOneAndUpdate(
+          { maphong: deleted1Tenant.maphong },
+          { trangthaiphong: false },
+          { new: true }
+      );
+
+      res.json({message: 'Xóa khách thuê thành công. Trạng thái phòng đã được cập nhật.' });
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Lỗi server' });
+  }
+});
 
 
 

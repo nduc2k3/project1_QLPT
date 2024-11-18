@@ -10,10 +10,11 @@ const TenantSchema = new Schema({
     },
     tenkt: { 
         type: String, 
-        required: true 
+        
     },
     sdt: { 
-        type: String 
+        type: String, 
+        required: true 
     },
     email: { 
         type: String 
@@ -28,7 +29,8 @@ const TenantSchema = new Schema({
         type: Date 
     },
     cccd: { 
-        type: String 
+        type: String,
+        required: true  
     },
     ngaycap: { 
         type: Date 

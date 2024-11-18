@@ -19,8 +19,9 @@ const TvSchema = new Schema({
         type: String 
     },
     cccd: { 
-        type: String 
-    },
+        type: String,
+        required: true 
+    }, 
     diachi: { 
         type: String 
     },

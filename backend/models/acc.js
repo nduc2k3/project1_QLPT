@@ -11,15 +11,13 @@ const AccSchema = new Schema({
     password: {
         type: String,
         required: true,
-        validate: {
-            validator: function(v) {
-                return v.length >= 8;
-            },
-            message: 'Password must be at least 8 characters long'
-        }
+        minlength : 8
     }
 }, {
-    collection: "account"
+    collection: "account",
+    versionKey: false,
+    // _id: false
+
 });
 
 const AccModel = mongoose.model('account',AccSchema);

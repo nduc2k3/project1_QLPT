@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const AccModel = require('../models/acc')
+const { AccSchema } = require("../schemas/acc");
 
 router.get('/',(req,res,next)=>{
     AccModel.find({})
@@ -15,18 +16,32 @@ router.get('/',(req,res,next)=>{
 
 })
 
-router.post('/',(req,res,next)=>{
+router.post('/',async (req,res,next)=>{
     var email = req.body.email
     var password = req.body.password
+
+    const existingAccount = await AccModel.findOne({ email: email });
+        if (existingAccount) {
+            return res.status(400).json({ message: 'Email đã tồn tại trong hệ thống.' });
+        }
+
+    const {error} = AccSchema.validate(req.body,{abortEarly: false});
+    if(error){
+        const messages = error.details.map((message) => message.message)
+        return res.status(400).json({
+            messages,
+        })
+    }
+
     AccModel.create({
         email : email,
         password : password
     })
     .then(data=>{
-        res.json('them acc thanh cong')
+        res.json({message : 'them acc thanh cong'})
     })
     .catch(err=>{
-        res.status(500).json('loi sever')
+        res.status(500).json({message : 'loi sever'})
     })
 })
 
@@ -65,17 +80,26 @@ router.delete('/:email',(req,res,next)=>{
     })
 })
 
-router.get('/:email',(req,res,next)=>{
-    var email = req.params.email
-    AccModel.find({email: email})
-    .then(data=>{
-        res.json(data)
+router.post('/login', (req, res, next) => {
+    var email = req.body.email;
+    var password = req.body.password;
 
-    })
-    .catch(err=>{
-        res.status(500).json('Loi sever')
-    })
+    AccModel.findOne({ email: email })
+        .then(user => {
+            if (!user) {  
+                return res.json({ result: 0, message: 'Tài khoản không tồn tại' });
+            }
 
-})
+            if (user.password === password) {
+                return res.json({ result: 1, message: 'Đăng nhập thành công' });
+            } else {
+                return res.json({ result: 0, message: 'Mật khẩu không đúng' });
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json('Lỗi server');
+        });
+});
 
 module.exports = router
