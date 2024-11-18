@@ -76,7 +76,4 @@
       "\\.(css|less|scss)$": "identity-obj-proxy"
     }
   }
-  "scripts": {
-    "build": "react-scripts build"
-  }
 }
