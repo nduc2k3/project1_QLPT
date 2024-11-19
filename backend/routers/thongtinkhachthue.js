@@ -223,6 +223,7 @@ router.get('/listdv', async (req, res) => {
         {
           $project: {
             _id : 0,
+            makt:1,
             tenkt: 1,
             tenphong: "$room_info.tenphong",
             tendv: "$dichvu_info.tendv",

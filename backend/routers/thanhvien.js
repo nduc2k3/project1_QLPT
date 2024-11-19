@@ -26,7 +26,7 @@ router.post('/', async (req, res, next) => {
 
     const count = await TvModel.countDocuments({ makt: makt });
 
-    if (count >= 4) {
+    if (count >= 3) {
         return res.status(400).json({message:'Chỉ được thêm tối đa 4 thành viên cho mỗi mã khách thuê.'});
     }
 
