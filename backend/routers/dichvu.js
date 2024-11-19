@@ -10,7 +10,7 @@ router.get('/',(req,res,next)=>{
 
     })
     .catch(err=>{
-        res.status(500).json('Loi sever')
+        res.status(500).json({message:'Lỗi Sever'})
     })
 
 })
@@ -19,17 +19,28 @@ router.post('/',(req,res,next)=>{
     var madv = req.body.madv
     var tendv = req.body.tendv
     var giatien = req.body.giatien
-    DvModel.create({
-        madv : madv,
-        tendv : tendv,
-        giatien : giatien
-    })
-    .then(data=>{
-        res.json('them dich vu thanh cong')
-    })
-    .catch(err=>{
-        res.status(500).json('loi sever')
-    })
+    DvModel.findOne({ madv: madv })
+        .then(existingData => {
+            if (existingData) {
+                return res.status(400).json({message:'Mã dịch vụ đã tồn tại.'});
+            }
+
+            // Nếu 'madv' chưa tồn tại, thêm bản ghi mới
+            DvModel.create({
+                madv: madv,
+                tendv: tendv,
+                giatien: giatien
+            })
+                .then(data => {
+                    res.json({message:'Thêm dịch vụ thành công'});
+                })
+                .catch(err => {
+                    res.status(500).json({message:'Lỗi server'});
+                });
+        })
+        .catch(err => {
+            res.status(500).json({message:'Lỗi server'});
+        });
 })
 
 router.put('/:madv', (req, res, next) => {
@@ -38,12 +49,12 @@ router.put('/:madv', (req, res, next) => {
     DvModel.findOneAndUpdate({ madv : madv }, req.body, { new: true })
         .then(data => {
             if (!data) {
-                return res.status(404).json('Không tìm thấy dich vu để cập nhật');
+                return res.status(404).json({message:'Không tìm thấy dich vu để cập nhật'});
             }
-            res.json('Cập nhật dich vu thành công');
+            res.json({message:'Cập nhật dich vu thành công'});
         })
         .catch(err => {
-            res.status(500).json('Lỗi server khi cập nhật dich vu');
+            res.status(500).json({message:'Lỗi server khi cập nhật dịch vụ'});
         });
 });
 
@@ -53,10 +64,10 @@ router.delete('/:madv',(req,res,next)=>{
         madv : madv
     })
     .then(data=>{
-        res.json('Xoa thanh cong')
+        res.json({message:'Xóa thành công'})
     })
     .catch(err=>{
-        res.status(500).json('loi sever')
+        res.status(500).json({message:'Lỗi Sever'})
     })
 })
 

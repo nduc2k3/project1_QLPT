@@ -12,12 +12,12 @@ router.get('/',(req,res,next)=>{
 
     })
     .catch(err=>{
-        res.status(500).json('Loi sever')
+        res.status(500).json({message:'Lỗi Sever'})
     })
 
 })
 
-router.post('/',(req,res,next)=>{
+router.post('/',async (req,res,next)=>{
     var madn = req.body.madn
     var makt = req.body.makt
     var thang = req.body.thang
@@ -26,23 +26,37 @@ router.post('/',(req,res,next)=>{
     var sonuoc = req.body.sonuoc
     var giadien = req.body.giadien
     var gianuoc = req.body.gianuoc
-    DnModel.create({
-        madn : madn,
-        makt : makt,
-        thang : thang,
-        nam : nam,
-        sodien : sodien,
-        sonuoc : sonuoc,
-        giadien : giadien,
-        gianuoc : gianuoc
-    
-    })
-    .then(data=>{
-        res.json('them dien nuoc thanh cong')
-    })
-    .catch(err=>{
-        res.status(500).json('loi sever')
-    })
+    const existingDN = await DnModel.findOne({ makt: makt, thang: thang, nam: nam });
+    if (existingDN) {
+        return res.status(400).json({ message: 'Mã khách thuê đã tồn tại điện nước tháng,năm trên' });
+    }
+    DnModel.findOne({ madn: madn })
+        .then(existingData => {
+            if (existingData) {
+                return res.status(400).json({message:'Mã điện nước đã tồn tại trong cơ sở dữ liệu.'});
+            }
+
+            // Nếu 'madn' chưa tồn tại, thêm bản ghi mới
+            DnModel.create({
+                madn: madn,
+                makt: makt,
+                thang: thang,
+                nam: nam,
+                sodien: sodien,
+                sonuoc: sonuoc,
+                giadien: giadien,
+                gianuoc: gianuoc
+            })
+                .then(data => {
+                    res.json({message:'Thêm điện nước thành công'});
+                })
+                .catch(err => {
+                    res.status(500).json({message:'Lỗi server'});
+                });
+        })
+        .catch(err => {
+            res.status(500).json({message:'Lỗi server'});
+        });
 })
 
 router.get('/sodien', async (req, res, next) => {
@@ -78,6 +92,9 @@ router.get('/sodien', async (req, res, next) => {
                     thang: "$diennuoc_info.thang",
                     nam: "$diennuoc_info.nam"
                 }
+            },
+            {
+                $sort: { nam: -1, thang: -1 }
             }
         ]);
 
@@ -127,6 +144,9 @@ router.get('/sodienmonth', async (req, res, next) => {
                     "thang": parseInt(thang),
                     "nam": parseInt(nam)
                 }
+            },
+            {
+                $sort: { nam: -1, thang: -1 }
             }
         ]);
 
@@ -169,6 +189,9 @@ router.get('/sonuoc', async (req, res, next) => {
                     thang: "$diennuoc_info.thang",
                     nam: "$diennuoc_info.nam"
                 }
+            },
+            {
+                $sort: { nam: -1, thang: -1 }
             }
         ]);
 
@@ -218,6 +241,9 @@ router.get('/sonuocmonth', async (req, res, next) => {
                     "thang": parseInt(thang),
                     "nam": parseInt(nam)
                 }
+            },
+            {
+                $sort: { nam: -1, thang: -1 }
             }
         ]);
 

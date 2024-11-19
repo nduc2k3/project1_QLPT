@@ -11,7 +11,7 @@ router.get('/',(req,res,next)=>{
 
     })
     .catch(err=>{
-        res.status(500).json('Loi sever')
+        res.status(500).json({ message: 'Lỗi server' })
     })
 
 })
@@ -38,10 +38,10 @@ router.post('/',async (req,res,next)=>{
         password : password
     })
     .then(data=>{
-        res.json({message : 'them acc thanh cong'})
+        res.json({message : 'Thêm tài khoản thành công'})
     })
     .catch(err=>{
-        res.status(500).json({message : 'loi sever'})
+        res.status(500).json({message : 'Lỗi server'})
     })
 })
 
@@ -54,14 +54,14 @@ router.put('/', async (req, res, next) => {
         const account = await AccModel.findOne({ email: email });
 
         if (!account) {
-            return res.status(404).json('Tài khoản không tồn tại');
+            return res.status(404).json({ message: 'Tài khoản không tồn tại' });
         }
 
         // Cập nhật mật khẩu
         account.password = newPass;
         await account.save();
 
-        res.json('Cập nhật mật khẩu thành công');
+        res.json({message:'Cập nhật mật khẩu thành công'});
     } catch (err) {
         res.status(500).json('Lỗi server');
     }
@@ -73,10 +73,10 @@ router.delete('/:email',(req,res,next)=>{
         email : email
     })
     .then(data=>{
-        res.json('Xoa thanh cong')
+        res.json({message:'Xóa tài khoản thành công'})
     })
     .catch(err=>{
-        res.status(500).json('loi sever')
+        res.status(500).json({message:'Lỗi Server'})
     })
 })
 

@@ -11,7 +11,7 @@ router.get('/',(req,res,next)=>{
 
     })
     .catch(err=>{
-        res.status(500).json('Loi sever')
+        res.status(500).json({message:'Lỗi Server'})
     })
 
 })
@@ -22,6 +22,13 @@ router.post('/', async (req, res, next) => {
         const madv = req.body.madv;
         const soluong = req.body.soluong;
 
+        const existingST = await STModel.findOne({ makt: makt, madv: madv });
+
+    if (existingST) {
+        return res.status(400).json({message:'khách thuê đã có dịch vụ này.'});
+    }
+
+
         const newST = new STModel({
             makt: makt,
             madv: madv,
@@ -30,7 +37,7 @@ router.post('/', async (req, res, next) => {
 
         await newST.save();
 
-        res.json('Thêm dịch vụ khách thuê thành công');
+        res.json({message:'Thêm dịch vụ khách thuê thành công'});
     
 });
 
@@ -40,12 +47,12 @@ router.put('/:mast', (req, res, next) => {
     STModel.findOneAndUpdate({ mast : mast }, req.body, { new: true })
         .then(data => {
             if (!data) {
-                return res.status(404).json('Không tìm thấy dich vu khach thue để cập nhật');
+                return res.status(404).json({message:'Không tìm thấy dịch vụ khách thuê để cập nhật'});
             }
-            res.json('Cập nhật dich vu khach thue thành công');
+            res.json({message:'Cập nhật dịch vụ khách thuê thành công'});
         })
         .catch(err => {
-            res.status(500).json('Lỗi server khi cập nhật dich vu');
+            res.status(500).json('Lỗi server khi cập nhật');
         });
 });
 
@@ -55,10 +62,10 @@ router.delete('/:mast',(req,res,next)=>{
         mast : mast
     })
     .then(data=>{
-        res.json('Xoa thanh cong')
+        res.json({message:'Xóa thành công'})
     })
     .catch(err=>{
-        res.status(500).json('loi sever')
+        res.status(500).json({message:'Lỗi Server'})
     })
 })
 
@@ -70,12 +77,9 @@ router.get('/:mast',(req,res,next)=>{
 
     })
     .catch(err=>{
-        res.status(500).json('Loi sever')
+        res.status(500).json({message:'Lỗi server'})
     })
 
 })
-
-
-        
 
 module.exports = router

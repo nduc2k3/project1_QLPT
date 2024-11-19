@@ -10,12 +10,12 @@ router.get('/',(req,res,next)=>{
 
     })
     .catch(err=>{
-        res.status(500).json('Loi sever')
+        res.status(500).json({message:'Lỗi Server'})
     })
 
 })
 
-router.post('/', (req, res, next) => {
+router.post('/', async (req, res, next) => {
     var makt = req.body.makt
     var tentv = req.body.tentv
     var ngaysinh = req.body.ngaysinh
@@ -23,6 +23,19 @@ router.post('/', (req, res, next) => {
     var cccd = req.body.cccd
     var diachi = req.body.diachi
     var sdt = req.body.sdt
+
+    const count = await TvModel.countDocuments({ makt: makt });
+
+    if (count >= 4) {
+        return res.status(400).json({message:'Chỉ được thêm tối đa 4 thành viên cho mỗi mã khách thuê.'});
+    }
+
+    const existingTv = await TvModel.findOne({ cccd: cccd });
+
+    if (existingTv) {
+        return res.status(400).json({message:'Số CCCD đã tồn tại trong cơ sở dữ liệu.'});
+    }
+
     
     TvModel.create({
         makt: makt,
@@ -35,10 +48,10 @@ router.post('/', (req, res, next) => {
 
     })
         .then(data => {
-            res.json('them khach thue thanh cong')
+            res.json({message:'thêm thành viên thành công'})
         })
         .catch(err => {
-            res.status(500).json('loi sever')
+            res.status(500).json(err)
         })
 })
 
@@ -48,10 +61,10 @@ router.delete('/:cccd',(req,res,next)=>{
         cccd : cccd
     })
     .then(data=>{
-        res.json('Xoa thanh cong')
+        res.json({message:'Xóa thành công'})
     })
     .catch(err=>{
-        res.status(500).json('loi sever')
+        res.status(500).json({message:'loi sever'})
     })
 })
 
@@ -63,12 +76,12 @@ router.put('/:cccd', (req, res, next) => {
     TvModel.findOneAndUpdate({ cccd : cccd }, req.body, { new: true })
         .then(data => {
             if (!data) {
-                return res.status(404).json('Không tìm thấy thanh vien để cập nhật');
+                return res.status(404).json({message:'Không tìm thấy thành viên để cập nhật'});
             }
-            res.json('Cập nhật thanh vien thành công');
+            res.json({message:'Cập nhật thành viên thành công'});
         })
         .catch(err => {
-            res.status(500).json('Lỗi server khi cập nhật thanh vien');
+            res.status(500).json({message:'Lỗi server khi cập nhật thanh vien'});
         });
 });
 

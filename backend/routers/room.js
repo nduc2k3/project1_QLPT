@@ -10,12 +10,12 @@ router.get('/', (req, res, next) => {
 
         })
         .catch(err => {
-            res.status(500).json('Loi sever')
+            res.status(500).json({message:'Lỗi sever'})
         })
 
 })
 
-router.post('/', (req, res, next) => {
+router.post('/',async (req, res, next) => {
     var maphong = req.body.maphong
     var tenphong = req.body.tenphong
     var tang = req.body.tang
@@ -24,6 +24,12 @@ router.post('/', (req, res, next) => {
     var hinhanh = req.body.hinhanh
     var giaphong = req.body.giaphong
     var mota = req.body.mota
+
+    const existingRoom = await RoomModel.findOne({ maphong: maphong });
+
+    if (existingRoom) {
+        return res.status(400).json({message:'Mã phòng đã tồn tại.'});
+    }
 
     RoomModel.create({
         maphong: maphong,
@@ -37,10 +43,10 @@ router.post('/', (req, res, next) => {
 
     })
         .then(data => {
-            res.json('them phong thanh cong')
+            res.json({message:'Thêm phòng thành công'})
         })
         .catch(err => {
-            res.status(500).json('loi sever')
+            res.status(500).json({message:'Lỗi sever'})
         })
 })
 
@@ -52,12 +58,12 @@ router.delete('/:maphong', (req, res, next) => {
     })
     .then(data => {
         if (data.deletedCount === 0) {
-            return res.status(404).json('Không tìm thấy phòng để xóa');
+            return res.status(404).json({message:'Không tìm thấy phòng để xóa'});
         }
-        res.json('Xóa thành công');
+        res.json({message:'Xóa thành công'});
     })
     .catch(err => {
-        res.status(500).json('Lỗi server');
+        res.status(500).json({message:'Lỗi server'});
     });
 });
 
@@ -67,12 +73,12 @@ router.put('/:maphong', (req, res, next) => {
     RoomModel.findOneAndUpdate({ maphong: maphong }, req.body, { new: true })
         .then(updatedRoom => {
             if (!updatedRoom) {
-                return res.status(404).json('Không tìm thấy phòng để cập nhật');
+                return res.status(404).json({message:'Không tìm thấy phòng để cập nhật'});
             }
-            res.json('Cập nhật phòng thành công');
+            res.json({message:'Cập nhật phòng thành công'});
         })
         .catch(err => {
-            res.status(500).json('Lỗi server khi cập nhật phòng');
+            res.status(500).json({message:'Lỗi server khi cập nhật phòng'});
         });
 });
 

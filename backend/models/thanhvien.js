@@ -5,8 +5,8 @@ mongoose.connect('mongodb://localhost/DB0001');
 const TvSchema = new Schema({
     makt: { 
         type: String,
-         required: true,
-          
+        required: true,
+        unique: false
     },
     tentv: { 
         type: String, 
@@ -20,7 +20,7 @@ const TvSchema = new Schema({
     },
     cccd: { 
         type: String,
-        required: true 
+        required: true, 
     }, 
     diachi: { 
         type: String 
@@ -29,7 +29,7 @@ const TvSchema = new Schema({
         type: String 
     }
 }, {
-    collection: "thanhvien"
+    collection: "thanhvien",
 });
 
 const TvModel = mongoose.model('thanhvien',TvSchema);

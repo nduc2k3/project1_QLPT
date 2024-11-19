@@ -11,7 +11,7 @@ router.get('/',(req,res,next)=>{
 
     })
     .catch(err=>{
-        res.status(500).json('Loi sever')
+        res.status(500).json({message:'Lỗi Server'})
     })
 
 })
@@ -63,10 +63,10 @@ router.post('/',async (req, res, next) => {
 
     })
         .then(data => {
-            res.json('them khach thue thanh cong')
+            res.json({message:'Thêm khách thuê thành công'})
         })
         .catch(err => {
-          return  res.status(500).json('loi sever')
+          return  res.status(500).json({message:'Lỗi Server'})
         })
 
     await RoomModel.updateOne({ maphong }, { trangthaiphong: true });
@@ -100,19 +100,34 @@ router.delete('/:makt', async (req, res, next) => {
 
 
 
-router.put('/:makt', (req, res, next) => {
+router.put('/:makt',async (req, res, next) => {
     const makt = req.params.makt;
+
+    const updateTenant = await TenantModel.findOne({makt});
+
 
     TenantModel.findOneAndUpdate({ makt : makt }, req.body, { new: true })
         .then(data => {
             if (!data) {
-                return res.status(404).json('Không tìm thấy phòng để cập nhật');
+                return res.status(404).json({message:'Không tìm thấy phòng để cập nhật'});
             }
-            res.json('Cập nhật phòng thành công');
+            res.json({message:'Cập nhật phòng thành công'});
         })
         .catch(err => {
-            res.status(500).json('Lỗi server khi cập nhật phòng');
+            res.status(500).json({message:'Lỗi server khi cập nhật phòng'});
         });
+    await RoomModel.findOneAndUpdate(
+        { maphong: updateTenant.maphong },
+        { trangthaiphong: false },
+        { new: true }
+    );
+
+    const update1Tenant = await TenantModel.findOne({makt});
+    await RoomModel.findOneAndUpdate(
+      { maphong: update1Tenant.maphong },
+      { trangthaiphong: true },
+      { new: true }
+  );
 });
 
 router.get('/listdv', async (req, res) => {
