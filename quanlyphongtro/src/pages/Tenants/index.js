@@ -58,11 +58,13 @@ function Tenants() {
 
     const handleRowClick = (makt) => {
         if (selectedEmployee === makt) {
-            setSelectedEmployee(0);
+            setSelectedEmployee(null);
+            setSelectedMakt(null);
             return;
+        } else{
+            setSelectedEmployee(makt);
+            setSelectedMakt(makt);
         }
-        setSelectedEmployee(makt);
-        setSelectedMakt(makt);
     };
 
     const handleDeleteClick = async () => {
@@ -73,6 +75,7 @@ function Tenants() {
         try {
                 await axios.delete(`http://localhost:8080/api/tenant/${selectedMakt}`);
                 fetchTenants();
+                alert("Xóa khách thuê thành công!")
                 setSelectedMakt(null);
             } catch (error) {
                 console.error("Lỗi khi xóa khách thuê:", error);
@@ -168,6 +171,7 @@ function Tenants() {
                     <table className="table-tenants-table">
                         <thead>
                             <tr>
+                                <th>Mã KT</th>
                                 <th style={{width:'200px'}}>Họ tên</th>
                                 <th>Ngày sinh</th>
                                 <th>CCCD</th>
@@ -186,6 +190,7 @@ function Tenants() {
                                     style={{ cursor: 'pointer' }}
                                     className={`row-employee ${parseInt(selectedEmployee) === parseInt(tenant.makt) ? 'active' : ''}`}
                                 >
+                                    <td>{tenant.makt}</td>
                                     <td>{tenant.tenkt}</td>
                                     <td>{formatDate(tenant.ngaysinh)}</td>
                                     <td>{tenant.cccd}</td>

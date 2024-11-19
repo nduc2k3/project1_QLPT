@@ -28,16 +28,19 @@ function ThemDichVu() {
                 tendv,
                 giatien
             };
-
-            // Gửi yêu cầu POST đến API
             const response = await axios.post('http://localhost:8080/api/dichvu', newService);
-            alert("Dịch Vụ Được Thêm Thành Công",response.data); // Thông báo cho người dùng
-
-            // Chuyển hướng trở lại trang danh sách dịch vụ
-            handleBack();
+            if(response.data && response.data.message){
+                alert(response.data.message);
+                handleBack();
+            }
         } catch (error) {
-            console.error("Có lỗi khi thêm dữ liệu:", error);
-            alert("Có lỗi xảy ra khi thêm dịch vụ. Vui lòng thử lại."); // Thông báo lỗi cho người dùng
+            if(error.response && error.response.data && error.response.data.message){
+                alert(error.response.data.message);
+                setMaDV('');
+                setTenDV('');
+                setGiaDV('');
+            }
+            console.error(error);
         }
     };
 

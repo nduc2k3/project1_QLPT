@@ -40,15 +40,20 @@ function AddTenant() {
         } else {
             setMessage('');
         }
-
         try {
-            await axios.post('http://localhost:8080/api/tenant', tenantData);
-            alert('Thông tin đã được lưu thành công!');
+            const response = await axios.post('http://localhost:8080/api/tenant', tenantData);
+            // Hiển thị message từ server trong trường hợp thành công
+            if (response.data && response.data.message) {
+                alert(response.data.message);
+            }
             navigate('/tenants');
         } catch (error) {
-            alert('Có lỗi xảy ra khi lưu thông tin.');
+            // Hiển thị message từ server trong trường hợp lỗi
+            if (error.response && error.response.data && error.response.data.message) {
+                alert(error.response.data.message);
+            }
             console.error(error);
-        }
+        }        
     };
 
     return (

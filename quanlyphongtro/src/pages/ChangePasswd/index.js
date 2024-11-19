@@ -14,6 +14,11 @@ function ChangePasswd() {
     const handleSave = async () => {
         const storedPassword = localStorage.getItem('password'); // Lấy mật khẩu từ localStorage
         const email = localStorage.getItem('email'); // Lấy email từ localStorage
+        if(!currentPassword || !newPass || !confirmPassword){
+            setError('Vui lòng nhập đầy đủ thông tin!');
+            setSuccess('');
+            return;
+        }
 
         // Kiểm tra mật khẩu hiện tại
         if (currentPassword !== storedPassword) {

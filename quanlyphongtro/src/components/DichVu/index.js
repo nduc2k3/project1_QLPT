@@ -53,19 +53,28 @@ function DichVu() {
     }));
 
     try {
-      // Lưu từng dịch vụ một
+
       for (const service of dataToSend) {
-        await axios.post('http://localhost:8080/api/dv_kt', service);
+        const response = await axios.post('http://localhost:8080/api/dv_kt', service);
+        
+        // Kiểm tra nếu server trả về thông báo lỗi
+        if (response.data && response.data.message) {
+          alert(response.data.message); // Hiển thị thông báo lỗi từ server
+          return; // Dừng lại nếu có lỗi
+        }
       }
       alert("Lưu thành công!");
       console.log("Dữ liệu gửi đi:", dataToSend);
-      // Reset states
       setSelectedServices([]);
       setMakt("");
       setSoluong({});
     } catch (error) {
       console.error("Lỗi khi lưu dữ liệu:", error);
-      alert("Có lỗi xảy ra khi lưu dữ liệu. Vui lòng thử lại.");
+      if (error.response && error.response.data && error.response.data.message) {
+        alert(error.response.data.message); // Hiển thị thông báo lỗi từ server
+      } else {
+        alert("Có lỗi xảy ra khi lưu dữ liệu. Vui lòng thử lại.");
+      }
     }
   };
 

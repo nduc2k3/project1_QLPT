@@ -61,11 +61,15 @@ function ThanhVien() {
             }
         } catch (error) {
             console.error("Lỗi khi lưu dữ liệu:", error);
-            alert("Có lỗi xảy ra khi lưu dữ liệu.");
+            if (error.response && error.response.data && error.response.data.message) {
+                alert(error.response.data.message);
+            } else {
+                alert("Có lỗi xảy ra khi lưu dữ liệu.");
+            }
         }
     };
 
-    return ( 
+    return (
         <div className="container-thanhvien">
             <div className="makt-thanhvien">
                 <label style={{ marginBottom: '12px' }}>Mã Khách Thuê</label>

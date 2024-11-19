@@ -23,6 +23,8 @@ function ThongTinDichVu() {
                     <thead>
                         <tr>
                             <th>Phòng</th>
+                            <th>Mã KT</th>
+                            <th>Tên KT</th>
                             <th>Dịch Vụ</th>
                             <th>Số Tiền</th>
                             <th>Số Lượng</th>
@@ -33,6 +35,8 @@ function ThongTinDichVu() {
                             service.map((service,index) =>(
                                 <tr key={index}>
                                     <td>{service.tenphong}</td>
+                                    <td>{service.makt}</td>
+                                    <td>{service.tenkt}</td>
                                     <td>{service.tendv}</td>
                                     <td>{parseInt(service.giatien).toLocaleString('vi-VN')}</td>
                                     <td>{service.soluong}</td>

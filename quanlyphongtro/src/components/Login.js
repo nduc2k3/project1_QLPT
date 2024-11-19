@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Login.css';
 import axios from 'axios';
@@ -7,34 +7,17 @@ import { useNavigate } from 'react-router-dom';
 const Login = ({ onLoginSuccess }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [apiEmails, setApiEmails] = useState([]);
-    const [apiPasswords, setApiPasswords] = useState([]);
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
 
-    // Sử dụng useLayoutEffect để đảm bảo class được thêm trước khi render
+    // Sử dụng useLayoutEffect để thêm class vào body
     useLayoutEffect(() => {
         document.body.classList.add('login-page');
-
         return () => {
-            document.body.classList.remove('login-page'); // Xóa class khi component unmount
+            document.body.classList.remove('login-page');
         };
-    }, []);
-
-    useEffect(() => {
-        const fetchUserData = async () => {
-            try {
-                const response = await axios.get('http://localhost:8080/api/acc');
-                const users = response.data || [];
-                setApiEmails(users.map(user => user.email));
-                setApiPasswords(users.map(user => user.password));
-            } catch (error) {
-                console.error('Error fetching user data:', error);
-            }
-        };
-        fetchUserData();
     }, []);
 
     const validateEmail = (email) => {
@@ -59,19 +42,25 @@ const Login = ({ onLoginSuccess }) => {
             return;
         }
 
-        if (apiEmails.includes(email) && apiPasswords.includes(password)) {
-            // Lưu thông tin email và password vào localStorage
-            localStorage.setItem('email', email);
-            localStorage.setItem('password', password);
+        try {
+            // Gửi email và password lên API
+            const response = await axios.post('http://localhost:8080/api/acc/login', { email, password });
+            const { result, message } = response.data;
 
-            alert('Đăng nhập thành công!');
-            onLoginSuccess();
-            navigate("/home");
-        } else {
-            setError("Đăng nhập thất bại. Email hoặc mật khẩu không đúng.");
+            if (result === 1) {
+                alert(message);
+                localStorage.setItem('email', email);
+                onLoginSuccess();
+                navigate("/home");
+            } else {
+                setError(message);
+            }
+        } catch (error) {
+            console.error('Error during login:', error);
+            setError("Đã xảy ra lỗi trong quá trình đăng nhập. Vui lòng thử lại.");
+        } finally {
+            setLoading(false);
         }
-
-        setLoading(false);
     };
 
     return (
@@ -91,7 +80,7 @@ const Login = ({ onLoginSuccess }) => {
 
             <input
                 type='password'
-                placeholder='Password...'
+                placeholder='Mật khẩu...'
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
                 required
