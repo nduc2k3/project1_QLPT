@@ -41,7 +41,7 @@ function AddTenant() {
             setMessage('');
         }
         try {
-            const response = await axios.post('http://localhost:8080/api/tenant', tenantData);
+            const response = await axios.post('https://qlpt.onrender.com/api/tenant', tenantData);
             // Hiển thị message từ server trong trường hợp thành công
             if (response.data && response.data.message) {
                 alert(response.data.message);

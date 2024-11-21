@@ -26,7 +26,7 @@ function ThongTin({ onDataChange }) {
     useEffect(() => {
         const fetchRooms = async () => {
             try {
-                const response = await axios.get("http://localhost:8080/api/room");
+                const response = await axios.get("https://qlpt.onrender.com/api/room");
                 const availableRooms = response.data.filter(room => room.trangthaiphong === false);
                 setSuggestions(availableRooms);
             } catch (error) {

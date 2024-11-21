@@ -6,7 +6,7 @@ function ThongTinDichVu() {
     const [service,setService] = useState([]);
     const fetchService = async () =>{
         try{
-            const respone = await axios.get('http://localhost:8080/api/ttkt/listdv');
+            const respone = await axios.get('https://qlpt.onrender.com/api/ttkt/listdv');
             const data = respone.data;
             setService(data);
         } catch(error){

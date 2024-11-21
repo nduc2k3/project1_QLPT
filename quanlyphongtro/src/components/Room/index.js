@@ -15,7 +15,7 @@ const Room = ({ room, onDelete, onUpdate }) => {
 
     const handleDelete = async () => {
         try {
-            await axios.delete(`http://localhost:8080/api/room/${room.maphong}`);
+            await axios.delete(`https://qlpt.onrender.com/api/room/${room.maphong}`);
             alert("Phòng đã được xóa thành công");
             onDelete(room.maphong);
         } catch (error) {
@@ -31,7 +31,7 @@ const Room = ({ room, onDelete, onUpdate }) => {
                 trangthaiphong: newTrangthai,
                 trangthaitt: newTrangthaitt
             };
-            await axios.put(`http://localhost:8080/api/room/${room.maphong}`, updatedRoom);
+            await axios.put(`https://qlpt.onrender.com/api/room/${room.maphong}`, updatedRoom);
             alert("Cập nhật thành công");
             onUpdate({ ...room, ...updatedRoom });
             setIsEditing(false);

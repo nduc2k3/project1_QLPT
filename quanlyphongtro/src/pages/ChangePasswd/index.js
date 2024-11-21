@@ -43,7 +43,7 @@ function ChangePasswd() {
 
         try {
             // Gửi yêu cầu cập nhật mật khẩu mới đến API
-            const response = await axios.put('http://localhost:8080/api/acc', {
+            const response = await axios.put('https://qlpt.onrender.com/api/acc', {
                 email: email, // Email người dùng
                 newPass: newPass // Mật khẩu mới
             });

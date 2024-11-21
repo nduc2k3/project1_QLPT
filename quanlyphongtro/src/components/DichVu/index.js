@@ -11,7 +11,7 @@ function DichVu() {
 
   const fetchListDV = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/api/dichvu');
+      const response = await axios.get('https://qlpt.onrender.com/api/dichvu');
       setDvList(response.data);
     } catch (error) {
       console.error("Lỗi khi gọi API:", error);
@@ -55,7 +55,7 @@ function DichVu() {
     try {
 
       for (const service of dataToSend) {
-        const response = await axios.post('http://localhost:8080/api/dv_kt', service);
+        const response = await axios.post('https://qlpt.onrender.com/api/dv_kt', service);
         
         // Kiểm tra nếu server trả về thông báo lỗi
         if (response.data && response.data.message) {

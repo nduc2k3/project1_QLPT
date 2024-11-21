@@ -26,7 +26,7 @@ function Tenants() {
             if (floor) params.tang = floor;
             if (room) params.tenphong = room;
 
-            const response = await axios.get('http://localhost:8080/api/ttkt/danhsach', { params });
+            const response = await axios.get('https://qlpt.onrender.com/api/ttkt/danhsach', { params });
             const data = response.data;
 
             setNoData(data.length === 0);
@@ -73,7 +73,7 @@ function Tenants() {
             return;
         }
         try {
-                await axios.delete(`http://localhost:8080/api/tenant/${selectedMakt}`);
+                await axios.delete(`https://qlpt.onrender.com/api/tenant/${selectedMakt}`);
                 fetchTenants();
                 alert("Xóa khách thuê thành công!")
                 setSelectedMakt(null);

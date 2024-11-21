@@ -18,7 +18,7 @@ function Water() {
     // Hàm để lấy toàn bộ số nước
     const fetchAllWater = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/api/diennuoc/sonuoc');
+            const response = await axios.get('https://qlpt.onrender.com/api/diennuoc/sonuoc');
             const dataN = response.data;
 
             if (dataN.length > 0) {
@@ -53,7 +53,7 @@ function Water() {
         // Tách tháng và năm từ chuỗi đã chọn
         const [selectedMonth, selectedYear] = selectedMonthYear.split('/');
         try {
-            const response = await axios.get(`http://localhost:8080/api/diennuoc/sonuocmonth?thang=${selectedMonth}&nam=${selectedYear}`);
+            const response = await axios.get(`https://qlpt.onrender.com/api/diennuoc/sonuocmonth?thang=${selectedMonth}&nam=${selectedYear}`);
             const dataN = response.data;
 
             if (dataN.length > 0) {

@@ -41,7 +41,7 @@ function Rooms() {
     useEffect(() => {
         const fetchRoomData = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/api/room');
+                const response = await axios.get('https://qlpt.onrender.com/api/room');
                 const rooms = response.data;
                 setListRoom(rooms);
                 setFilteredRooms(rooms);

@@ -14,7 +14,7 @@ function Home() {
     const [unpaidRevenue, setUnpaidRevenue] = useState(0); // Revenue for unpaid rooms
     const fetchRoom = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/api/room/');
+            const response = await axios.get('https://qlpt.onrender.com/api/room/');
             const data = response.data;
             setListRoom(data);
 

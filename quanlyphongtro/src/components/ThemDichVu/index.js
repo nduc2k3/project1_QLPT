@@ -28,7 +28,7 @@ function ThemDichVu() {
                 tendv,
                 giatien
             };
-            const response = await axios.post('http://localhost:8080/api/dichvu', newService);
+            const response = await axios.post('https://qlpt.onrender.com/api/dichvu', newService);
             if(response.data && response.data.message){
                 alert(response.data.message);
                 handleBack();

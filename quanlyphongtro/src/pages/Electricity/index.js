@@ -19,7 +19,7 @@ function Electricity() {
     // Hàm gọi API để lấy toàn bộ số điện
     const fetchAllElectric = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/api/diennuoc/sodien');
+            const response = await axios.get('https://qlpt.onrender.com/api/diennuoc/sodien');
             const dataD = response.data;
 
             if (dataD.length > 0) {
@@ -55,7 +55,7 @@ function Electricity() {
 
         // Gọi API với tháng và năm đã chọn
         try {
-            const response = await axios.get(`http://localhost:8080/api/diennuoc/sodienmonth?thang=${selectedMonth}&nam=${selectedYear}`);
+            const response = await axios.get(`https://qlpt.onrender.com/api/diennuoc/sodienmonth?thang=${selectedMonth}&nam=${selectedYear}`);
             const dataD = response.data;
 
             // Kiểm tra nếu dữ liệu có hay không

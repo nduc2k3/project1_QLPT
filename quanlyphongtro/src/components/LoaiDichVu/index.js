@@ -19,7 +19,7 @@ function LoaiDichVu() {
             return;
         }
         try{
-            await axios.delete(`http://localhost:8080/api/dichvu/${selectedService}`);
+            await axios.delete(`https://qlpt.onrender.com/api/dichvu/${selectedService}`);
             alert("Dịch vụ đã được xóa thành công.");
             fetchService();
             setSelectedService(null);
@@ -30,7 +30,7 @@ function LoaiDichVu() {
     };
     const fetchService = async () => {
         try{
-            const respone = await axios.get('http://localhost:8080/api/dichvu');
+            const respone = await axios.get('https://qlpt.onrender.com/api/dichvu');
             const data = respone.data;
             setServices(data)
         } catch(error){

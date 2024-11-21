@@ -37,7 +37,7 @@ function ThanhVien() {
                     };
 
                     // Gửi hàng dữ liệu đã điền đầy đủ
-                    await axios.post("http://localhost:8080/api/thanhvien", payload, {
+                    await axios.post("https://qlpt.onrender.com/api/thanhvien", payload, {
                         headers: { "Content-Type": "application/json" }
                     });
 

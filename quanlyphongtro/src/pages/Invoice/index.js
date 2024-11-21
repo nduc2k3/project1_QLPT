@@ -20,7 +20,7 @@ function Invoice() {
             if (year) params.nam = year;
             if (room) params.tenphong = room;
             if (floor) params.tang = floor;
-            const response = await axios.get('http://localhost:8080/api/ttkt/tongtien', { params });
+            const response = await axios.get('https://qlpt.onrender.com/api/ttkt/tongtien', { params });
             const data = response.data;
             setData(data.length === 0); // Nếu không có dữ liệu thì setData là true
             setInvoice(data);

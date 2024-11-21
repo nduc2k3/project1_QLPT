@@ -44,7 +44,7 @@ const Login = ({ onLoginSuccess }) => {
 
         try {
             // Gửi email và password lên API
-            const response = await axios.post('http://localhost:8080/api/acc/login', { email, password });
+            const response = await axios.post('https://qlpt.onrender.com/api/acc/login', { email, password });
             const { result, message } = response.data;
 
             if (result === 1) {
