@@ -8,9 +8,6 @@ const Room = ({ room, onDelete, onUpdate }) => {
     const [newGiaphong, setNewGiaphong] = useState(room.giaphong);
     const [newTrangthai, setNewTrangthai] = useState(room.trangthaiphong);
     const [newTrangthaitt, setNewTrangthaitt] = useState(room.trangthaitt);
-    useEffect(() => {
-        document.title = `Phòng - Nhà Trọ`; // Cập nhật tiêu đề khi phòng được hiển thị
-    }, []);
 
     const handleViewDescription = () => {
         setShowDescription(true);

@@ -11,10 +11,6 @@ function ThemDichVu() {
     const [tendv, setTenDV] = useState('');
     const [giatien, setGiaDV] = useState('');
 
-    useEffect(() => {
-        document.title = "Thêm Dịch Vụ - Nhà trọ";
-    }, []);
-
     const handleBack = () => {
         navigate('/service');
     };

@@ -15,7 +15,6 @@ function ThongTinDichVu() {
     };
     useEffect(() =>{
         fetchService();
-        document.title = "Thông Tin Dịch Vụ - Nhà Trọ";
     },[]);
     return (  
         <div>

@@ -13,31 +13,31 @@ const Menu = ({menuId, children}) => {
     useEffect(() => {
         switch (menuId) {
             case 1:
-                document.title = 'Trang Chủ - Nhà Trọ';
+                document.title = 'Trang Chủ - Quản Lý Nhà Trọ';
                 break;
             case 2:
-                document.title = 'Phòng - Nhà Trọ';
+                document.title = 'Phòng - Quản Lý Nhà Trọ';
                 break;
             case 3:
-                document.title = 'Chỉ Số Điện - Nhà Trọ';
+                document.title = 'Chỉ Số Điện - Quản Lý Nhà Trọ';
                 break;
             case 4:
-                document.title = 'Chỉ Số Nước - Nhà Trọ';
+                document.title = 'Chỉ Số Nước - Quản Lý Nhà Trọ';
                 break;
             case 5:
-                document.title = 'DS Khách Thuê - Nhà Trọ';
+                document.title = 'DS Khách Thuê - Quản Lý Nhà Trọ';
                 break;
             case 6:
-                document.title = 'Dịch Vụ - Nhà Trọ';
+                document.title = 'Dịch Vụ - Quản Lý Nhà Trọ';
                 break;
             case 7:
-                document.title = 'Chi Tiết Hóa Đơn - Nhà Trọ';
+                document.title = 'Chi Tiết Hóa Đơn - Quản Lý Nhà Trọ';
                 break;
             case 8:
-                document.title = 'Đổi Mật Khẩu - Nhà Trọ';
+                document.title = 'Đổi Mật Khẩu - Quản Lý Nhà Trọ';
                 break;
             default:
-                document.title = 'Nhà Trọ';
+                document.title = 'Quản Lý Nhà Trọ';
         }
     }, [menuId]);
     return (

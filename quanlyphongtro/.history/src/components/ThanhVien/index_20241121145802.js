@@ -12,10 +12,6 @@ function ThanhVien() {
         { tentv: "", ngaysinh: "", gioitinh: "", cccd: "", diachi: "", sdt: "" },
     ]);
 
-    useEffect(() => {
-        document.title = "Quản lý thành viên - Nhà trọ"; // Cập nhật tiêu đề trang
-    }, []);
-
     const handleInputChange = (e, index, field) => {
         const newData = [...data];
         newData[index][field] = e.target.value;

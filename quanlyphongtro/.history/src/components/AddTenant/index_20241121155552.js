@@ -14,10 +14,6 @@ function AddTenant() {
     const [message, setMessage] = useState('');
     const navigate = useNavigate();
 
-    useEffect(() => {
-        document.title = 'Thêm khách thuê phòng - Nhà Trọ';
-    }, []);
-
     const handleMenuClick = (menu) => setActiveMenu(menu);
 
     const handleGoBack = () => navigate('/tenants');

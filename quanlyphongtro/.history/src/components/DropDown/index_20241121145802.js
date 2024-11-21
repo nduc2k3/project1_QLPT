@@ -5,8 +5,6 @@ const Dropdown = (props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(props.defaultItem || 'Select an option');
 
-
-
   // Theo dõi sự thay đổi của props.defaultItem và cập nhật selectedItem
   useEffect(() => {
     setSelectedItem(props.defaultItem || 'Select an option');
@@ -18,10 +16,6 @@ const Dropdown = (props) => {
       setIsOpen(false);
     }
   }, [props.closeDropdown]);
-
-  useEffect(() => {
-    document.title = `Dropdown - ${selectedItem}`;
-  }, [selectedItem]);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);

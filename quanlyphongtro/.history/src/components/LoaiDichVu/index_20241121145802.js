@@ -37,9 +37,6 @@ function LoaiDichVu() {
             console.error("Có lỗi khi lấy dữ liệu:", error);
         }
     };
-    useEffect(() => {
-        document.title = "Quản lý loại dịch vụ - Nhà Trọ";
-    }, []);
     useEffect(() =>{
         fetchService();
     },[]);

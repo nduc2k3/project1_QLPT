@@ -38,7 +38,7 @@ function LoaiDichVu() {
         }
     };
     useEffect(() => {
-        document.title = "Quản lý loại dịch vụ - Nhà Trọ";
+        document.title = "Quản lý loại dịch vụ";
     }, []);
     useEffect(() =>{
         fetchService();

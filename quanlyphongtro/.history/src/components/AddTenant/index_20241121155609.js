@@ -13,10 +13,7 @@ function AddTenant() {
     const [tenantData, setTenantData] = useState({});
     const [message, setMessage] = useState('');
     const navigate = useNavigate();
-
-    useEffect(() => {
-        document.title = 'Thêm khách thuê phòng - Nhà Trọ';
-    }, []);
+    
 
     const handleMenuClick = (menu) => setActiveMenu(menu);
 
