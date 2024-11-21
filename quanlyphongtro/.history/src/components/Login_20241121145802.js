@@ -15,7 +15,6 @@ const Login = ({ onLoginSuccess }) => {
     // Sử dụng useLayoutEffect để thêm class vào body
     useLayoutEffect(() => {
         document.body.classList.add('login-page');
-        document.title = 'Đăng Nhập - Quản Lý Phòng Trọ';
         return () => {
             document.body.classList.remove('login-page');
         };
