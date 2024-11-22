@@ -10,7 +10,7 @@
     const [soluong, setSoluong] = useState({});
 
     useEffect(() => {
-      document.title = "Dịch Vụ - Nhà Trọ";
+      document.title = "Dịch Vụ - Quản Lý Phòng Trọ";
     }, []);
 
     const fetchListDV = async () => {

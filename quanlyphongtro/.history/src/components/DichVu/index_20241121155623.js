@@ -9,10 +9,6 @@
     const [makt, setMakt] = useState("");
     const [soluong, setSoluong] = useState({});
 
-    useEffect(() => {
-      document.title = "Dịch Vụ - Nhà Trọ";
-    }, []);
-
     const fetchListDV = async () => {
       try {
         const response = await axios.get('https://qlpt.onrender.com/api/dichvu');

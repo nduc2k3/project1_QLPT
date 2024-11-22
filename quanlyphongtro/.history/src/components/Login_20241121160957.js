@@ -51,7 +51,6 @@ const Login = ({ onLoginSuccess }) => {
             if (result === 1) {
                 alert(message);
                 localStorage.setItem('email', email);
-                localStorage.setItem('password', password);
                 onLoginSuccess();
                 navigate("/home");
             } else {

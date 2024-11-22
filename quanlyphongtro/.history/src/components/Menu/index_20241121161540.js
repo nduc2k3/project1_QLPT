@@ -1,5 +1,5 @@
 // Menu.js
-import React, { useEffect } from 'react';
+import React, {useEffect } from 'react';
 import './Menu.css';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

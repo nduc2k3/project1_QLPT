@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState,useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Table from 'react-bootstrap/Table';
 import { useNavigate } from "react-router-dom";
@@ -38,7 +38,7 @@ function LoaiDichVu() {
         }
     };
     useEffect(() => {
-        document.title = "Quản lý loại dịch vụ - Nhà Trọ";
+        document.title = "Quản lý loại dịch vụ";
     }, []);
     useEffect(() =>{
         fetchService();

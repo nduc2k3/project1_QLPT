@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState,useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Table from 'react-bootstrap/Table';
 import { useNavigate } from "react-router-dom";
@@ -37,9 +37,6 @@ function LoaiDichVu() {
             console.error("Có lỗi khi lấy dữ liệu:", error);
         }
     };
-    useEffect(() => {
-        document.title = "Quản lý loại dịch vụ - Nhà Trọ";
-    }, []);
     useEffect(() =>{
         fetchService();
     },[]);

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import './ThemDichVu.css';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -10,10 +10,6 @@ function ThemDichVu() {
     const [madv, setMaDV] = useState('');
     const [tendv, setTenDV] = useState('');
     const [giatien, setGiaDV] = useState('');
-
-    useEffect(() => {
-        document.title = "Thêm Dịch Vụ - Nhà trọ";
-    }, []);
 
     const handleBack = () => {
         navigate('/service');

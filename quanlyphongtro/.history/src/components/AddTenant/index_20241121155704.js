@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faTimes, faCheck } from '@fortawesome/free-solid-svg-icons';
 import ThongTin from '../../components/ThongTin/index';
@@ -14,9 +14,6 @@ function AddTenant() {
     const [message, setMessage] = useState('');
     const navigate = useNavigate();
 
-    useEffect(() => {
-        document.title = 'Thêm khách thuê phòng - Nhà Trọ';
-    }, []);
 
     const handleMenuClick = (menu) => setActiveMenu(menu);
 

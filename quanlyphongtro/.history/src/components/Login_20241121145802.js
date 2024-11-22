@@ -15,7 +15,6 @@ const Login = ({ onLoginSuccess }) => {
     // Sử dụng useLayoutEffect để thêm class vào body
     useLayoutEffect(() => {
         document.body.classList.add('login-page');
-        document.title = 'Đăng Nhập - Nhà Trọ';
         return () => {
             document.body.classList.remove('login-page');
         };
@@ -51,7 +50,6 @@ const Login = ({ onLoginSuccess }) => {
             if (result === 1) {
                 alert(message);
                 localStorage.setItem('email', email);
-                localStorage.setItem('password', password);
                 onLoginSuccess();
                 navigate("/home");
             } else {

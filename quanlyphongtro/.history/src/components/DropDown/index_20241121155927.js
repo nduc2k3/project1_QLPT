@@ -19,10 +19,6 @@ const Dropdown = (props) => {
     }
   }, [props.closeDropdown]);
 
-  useEffect(() => {
-    document.title = `Dropdown - ${selectedItem}`;
-  }, [selectedItem]);
-
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };

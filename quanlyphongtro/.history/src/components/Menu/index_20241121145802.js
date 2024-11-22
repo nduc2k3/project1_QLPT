@@ -1,5 +1,5 @@
 // Menu.js
-import React, { useEffect } from 'react';
+import React from 'react';
 import './Menu.css';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,36 +10,6 @@ const Menu = ({menuId, children}) => {
         navigate('/login');
         window.location.reload();
     }
-    useEffect(() => {
-        switch (menuId) {
-            case 1:
-                document.title = 'Trang Chủ - Nhà Trọ';
-                break;
-            case 2:
-                document.title = 'Phòng - Nhà Trọ';
-                break;
-            case 3:
-                document.title = 'Chỉ Số Điện - Nhà Trọ';
-                break;
-            case 4:
-                document.title = 'Chỉ Số Nước - Nhà Trọ';
-                break;
-            case 5:
-                document.title = 'DS Khách Thuê - Nhà Trọ';
-                break;
-            case 6:
-                document.title = 'Dịch Vụ - Nhà Trọ';
-                break;
-            case 7:
-                document.title = 'Chi Tiết Hóa Đơn - Nhà Trọ';
-                break;
-            case 8:
-                document.title = 'Đổi Mật Khẩu - Nhà Trọ';
-                break;
-            default:
-                document.title = 'Nhà Trọ';
-        }
-    }, [menuId]);
     return (
         <>
          <div className="menu-container">

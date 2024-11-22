@@ -22,9 +22,7 @@ function ThongTin({ onDataChange }) {
 
     const [suggestions, setSuggestions] = useState([]);
 
-    useEffect(() => {
-        document.title = "Thông Tin Khách Thuê - Nhà Trọ";
-    }, []);
+    
     // Gọi API để lấy danh sách phòng trống
     useEffect(() => {
         const fetchRooms = async () => {
