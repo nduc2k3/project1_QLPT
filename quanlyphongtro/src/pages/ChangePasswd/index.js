@@ -12,9 +12,18 @@ function ChangePasswd() {
 
     // Hàm xử lý lưu mật khẩu mới
     const handleSave = async () => {
-        const storedPassword = localStorage.getItem('password'); // Lấy mật khẩu từ localStorage
-        const email = localStorage.getItem('email'); // Lấy email từ localStorage
-        if(!currentPassword || !newPass || !confirmPassword){
+        // Lấy email và mật khẩu từ localStorage
+        const storedPassword = localStorage.getItem('password');
+        const email = localStorage.getItem('email');
+
+        // Kiểm tra nếu email hoặc mật khẩu không tồn tại trong localStorage
+        if (!email || !storedPassword) {
+            setError('Không thể lấy thông tin người dùng. Vui lòng đăng nhập lại.');
+            setSuccess('');
+            return;
+        }
+
+        if (!currentPassword || !newPass || !confirmPassword) {
             setError('Vui lòng nhập đầy đủ thông tin!');
             setSuccess('');
             return;
@@ -22,21 +31,21 @@ function ChangePasswd() {
 
         // Kiểm tra mật khẩu hiện tại
         if (currentPassword !== storedPassword) {
-            setError('Mật khẩu hiện tại không chính xác');
+            setError('Mật khẩu hiện tại không chính xác.');
             setSuccess('');
             return;
         }
 
         // Kiểm tra mật khẩu mới và xác nhận mật khẩu có khớp không
         if (newPass !== confirmPassword) {
-            setError('Mật khẩu mới và xác nhận mật khẩu không khớp');
+            setError('Mật khẩu mới và xác nhận mật khẩu không khớp.');
             setSuccess('');
             return;
         }
 
         // Kiểm tra mật khẩu mới có ít nhất 8 ký tự không
         if (newPass.length < 8) {
-            setError('Mật khẩu mới phải có ít nhất 8 ký tự');
+            setError('Mật khẩu mới phải có ít nhất 8 ký tự.');
             setSuccess('');
             return;
         }
@@ -51,14 +60,18 @@ function ChangePasswd() {
             // Kiểm tra nếu cập nhật thành công
             if (response.status === 200) {
                 localStorage.setItem('password', newPass); // Lưu mật khẩu mới vào localStorage
-                setSuccess('Mật khẩu đã được thay đổi thành công');
+                setSuccess('Mật khẩu đã được thay đổi thành công.');
                 setError('');
-                setNewPass(''); // Reset form sau khi lưu thành công
+                // Reset form sau khi lưu thành công
+                setNewPass('');
                 setCurrentPassword('');
                 setConfirmPassword('');
+            } else {
+                setError('Không thể thay đổi mật khẩu. Vui lòng thử lại sau.');
+                setSuccess('');
             }
         } catch (error) {
-            setError('Đã xảy ra lỗi khi cập nhật mật khẩu');
+            setError('Đã xảy ra lỗi khi cập nhật mật khẩu. Vui lòng thử lại.');
             setSuccess('');
         }
     };
